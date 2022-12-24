@@ -34,8 +34,13 @@ public class User {
     @Column(nullable = true)
     private int career;                                    // 경력 태그 ( 0 : 신입, 1: 1년 이상 , ... , 10 : 10년 이상)
 
-    public User(String userId, String password) {
+    @Column(nullable = false)
+    @Enumerated(value = EnumType.STRING)
+    private UserRoleEnum role;
+
+    public User(String userId, String password, UserRoleEnum role) {
         this.userId = userId;
         this.password = password;
+        this.role = role;
     }
 }

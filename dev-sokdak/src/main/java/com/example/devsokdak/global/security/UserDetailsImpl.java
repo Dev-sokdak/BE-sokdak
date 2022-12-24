@@ -1,6 +1,8 @@
 package com.example.devsokdak.global.security;
 
 
+import com.example.devsokdak.user.entity.User;
+import com.example.devsokdak.user.entity.UserRoleEnum;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

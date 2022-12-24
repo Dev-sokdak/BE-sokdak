@@ -1,8 +1,8 @@
 package com.example.devsokdak.global.jwt;
 
 import com.example.devsokdak.global.security.UserDetailsServiceImpl;
-import com.example.moduhouse.global.security.UserDetailsServiceImpl;
-import com.example.moduhouse.user.entity.UserRoleEnum;
+import com.example.devsokdak.user.entity.UserRoleEnum;
+
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.SecurityException;
