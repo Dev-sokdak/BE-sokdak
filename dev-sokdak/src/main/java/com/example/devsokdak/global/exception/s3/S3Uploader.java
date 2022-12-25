@@ -4,6 +4,8 @@ import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.example.devsokdak.board.dto.BoardRequestDto;
+import com.example.devsokdak.user.entity.User;
 import com.example.moduhouse.board.dto.BoardRequestDto;
 import com.example.moduhouse.user.entity.User;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +30,7 @@ public class S3Uploader {
     @Value("${cloud.aws.s3.bucket}")
     public String bucket;
 
-    public String upload(User user, BoardRequestDto request, MultipartFile multipartFile, String dirName) throws IOException {
+    public String upload( MultipartFile multipartFile, String dirName) throws IOException {
         File uploadFile = convert(multipartFile).orElseThrow(() -> new IllegalArgumentException("파일 전환 실패"));
         return upload(uploadFile, dirName);
     }
