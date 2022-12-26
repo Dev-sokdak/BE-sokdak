@@ -34,7 +34,7 @@ public class UserService {
     // 회원가입
     @Transactional
     public MsgResponseDto signup(SignupRequestDto signupRequestDto) {
-        String username = signupRequestDto.getUsername();
+        String username = signupRequestDto.getUserId();
         String password = passwordEncoder.encode(signupRequestDto.getPassword());
 
         // 중복 닉네임

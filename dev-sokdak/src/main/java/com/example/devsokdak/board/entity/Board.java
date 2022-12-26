@@ -1,7 +1,7 @@
 package com.example.devsokdak.board.entity;
 
 import com.example.devsokdak.board.dto.BoardRequestDto;
-import com.example.devsokdak.comment.entity.Reply;
+import com.example.devsokdak.comment.entity.Comment;
 import com.example.devsokdak.global.entity.TimeStamped;
 import com.example.devsokdak.user.entity.User;
 import lombok.AllArgsConstructor;
@@ -27,7 +27,7 @@ public class Board extends TimeStamped {
     @Column(nullable = false)                               // 게시판 이미지는 0개 이상, 1개 이하로 Null 값 허용
     private String image;                                   // s3 Upload Url
     @OneToMany(mappedBy = "board")                          // Board(1) <-> reply(n) 양방향 관계
-    private List<Reply> replyList;
+    private List<Comment> commentList;
     @OneToMany(mappedBy = "board")                          // Board(1) <-> category(n) 양방향 관계
     private List<Category> categoryList;
     public Board(BoardRequestDto requestDto, User user, String image) {
@@ -37,12 +37,12 @@ public class Board extends TimeStamped {
         this.image = image;
         this.categoryList = categoryList;
     }
-    public Board(BoardRequestDto requestDto, User user, String image, List<Reply> replyList) {
+    public Board(BoardRequestDto requestDto, User user, String image, List<Comment> commentList) {
         this.title = requestDto.getTitle();
         this.content = requestDto.getContent();
         this.nickname = user.getNickname();
         this.image = image;
-        this.replyList = replyList;
+        this.commentList = commentList;
         this.categoryList = categoryList;
     }
 

@@ -10,6 +10,8 @@ import com.example.devsokdak.board.entity.Like;
 import com.example.devsokdak.board.repository.BoardRepository;
 import com.example.devsokdak.board.repository.CategoryRepository;
 import com.example.devsokdak.board.repository.LikeRepository;
+import com.example.devsokdak.comment.dto.CommentResponseDto;
+import com.example.devsokdak.comment.entity.Comment;
 import com.example.devsokdak.global.MsgResponseDto;
 import com.example.devsokdak.global.exception.CustomException;
 import com.example.devsokdak.global.exception.ErrorCode;
@@ -61,7 +63,7 @@ public class BoardService {
         for (Board board : boardList) {
             String image = board.getImage();
             List<CommentResponseDto> commentList = new ArrayList<>();
-            for (Comment comment : board.getComments()) {
+            for (Comment comment : board.getCommentList()) {
                 commentList.add(new CommentResponseDto(comment));
             }
 
@@ -84,7 +86,7 @@ public class BoardService {
         for (Board board : boardList) {
             String image = board.getImage();
             List<CommentResponseDto> commentList = new ArrayList<>();
-            for (Comment comment : board.getComments()) {
+            for (Comment comment : board.getCommentList()) {
                 commentList.add(new CommentResponseDto(comment));
             }
             boardResponseDto.add(new BoardResponseDto(board, commentList, image));
@@ -99,12 +101,12 @@ public class BoardService {
         );
         String image = board.getImage();
         List<CommentResponseDto> commentList = new ArrayList<>();
-        for (Comment comment : board.getComments()) {
+        for (Comment comment : board.getCommentList()) {
             commentList.add(new CommentResponseDto(comment));
         }
         return new BoardResponseDto(board, commentList,image);
     }
-    //게시글 업데이트 /*이미지 수*/
+    //게시글 업데이트 /*이미지 수정 필요*/
     @Transactional
     public BoardResponseDto updateBoard(User user, Long id, BoardRequestDto requestDto, List<MultipartFile> multipartFile) throws IOException {
         Board board;
@@ -121,14 +123,15 @@ public class BoardService {
         board.update(requestDto);
 
         List<CommentResponseDto> commentList = new ArrayList<>();
-        for (Comment comment : board.getComments()) {
+        for (Comment comment : board.getCommentList()) {
             commentList.add(new CommentResponseDto(comment));
         }
-        if (Local.valueOfLocal(requestDto.getLocal()) == null) {
+        if (InterestTag.valueOfInterestTag(requestDto.getCategoryList()) == null) {
             throw new CustomException(ErrorCode.NO_EXIST_LOCAL);
         }
 
-        List<String> image = new ArrayList<>();
+        String image = null;
+        /*List<String> image = new ArrayList<>();
         for (MultipartFile multipart : multipartFile) {
             if (!multipart.isEmpty()) { // 사진이 수정된 경우
                 image.add(s3Uploader.upload(multipart, "static")); // 새로들어온 이미지 s3 저장
@@ -149,12 +152,9 @@ public class BoardService {
                     imageRepository.save(new Image(selectImage, board));
                 }
             }
-        }
+        }*/
 
-        return new BoardResponseDto(
-                board,
-                commentList,
-                image);
+        return new BoardResponseDto(board, commentList, image);
 
     }
     //게시글 삭제 /*이미지 부분 수정 필요*/
@@ -171,13 +171,13 @@ public class BoardService {
             );
         }
 
-        List<Image> images = imageRepository.findByBoardId(board.getId());
+      /*  List<Image> images = imageRepository.findByBoardId(board.getId());
 
         for (Image image : images) {
             String selectImage = image.getImage();
             String fileName = selectImage.substring(69);
             s3Uploader.delete(fileName, "static");
-        }
+        }*/
 
         boardRepository.delete(board);
     }
