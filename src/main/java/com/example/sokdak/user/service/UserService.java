@@ -12,6 +12,7 @@ import com.example.sokdak.user.entity.User;
 import com.example.sokdak.user.entity.UserRoleEnum;
 import com.example.sokdak.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,9 +32,14 @@ public class UserService {
 
     private static final String ADMIN_TOKEN = "HangHae99NoHangHae130Yes";
 
+    private static int signUpType = 0;
+
     // 회원가입
     @Transactional
     public MsgResponseDto signup(SignupRequestDto signupRequestDto) {
+
+        String nickname = RandomStringUtils.random(15, true, true);                         // 닉네임 랜덤 생성
+
         String userId = signupRequestDto.getUserId();
         String password = passwordEncoder.encode(signupRequestDto.getPassword());
 
@@ -52,7 +58,7 @@ public class UserService {
             role = UserRoleEnum.ADMIN;
         }
 
-        User user = new User(userId, password, role);
+        User user = new User(userId, password, nickname, signUpType, role);
         userRepository.save(user);
         return new MsgResponseDto(SuccessCode.SIGN_UP);
     }
@@ -66,6 +72,11 @@ public class UserService {
         // 사용자 확인
         User user = userRepository.findByUserId(userId).orElseThrow(
                 () -> new CustomException(ErrorCode.NO_EXIST_USER));
+
+        // signUpType 확인
+        if(user.getSignUpType() != signUpType){
+            throw new CustomException(ErrorCode.NO_LOCAL_USER);
+        }
 
         // 비밀번호 확인
         if(!passwordEncoder.matches(password, user.getPassword())){

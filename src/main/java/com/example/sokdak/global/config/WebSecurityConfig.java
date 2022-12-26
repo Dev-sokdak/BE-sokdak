@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -16,6 +17,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
 @RequiredArgsConstructor
@@ -38,7 +42,6 @@ public class WebSecurityConfig {
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()));
     }
 
-    //
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
@@ -48,13 +51,11 @@ public class WebSecurityConfig {
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         http.authorizeRequests().antMatchers("/api/user/**").permitAll()
-                .antMatchers("/api/boards/**").permitAll()
-                .antMatchers("/images").permitAll()        // 확인해보기!!
-                .antMatchers("/api/comment/**").permitAll()
-                .antMatchers("/images").permitAll()
+                .antMatchers(HttpMethod.GET, "/**").permitAll()
                 .anyRequest().authenticated()
+                .and()
+                .cors()
                 .and().addFilterBefore(new JwtAuthFilter(jwtUtil), UsernamePasswordAuthenticationFilter.class);
-
         http.formLogin().loginPage("/api/user/login-page").permitAll();
         // 이 부분에서 login 관련 문제 발생
         // jwt 로그인 방식에서는 세션 로그인 방식을 막아줘야 한다.
@@ -63,20 +64,22 @@ public class WebSecurityConfig {
         return http.build();
     }
 //cors오류 해결 코드
-//    @Bean
-//    public CorsConfigurationSource corsConfigurationSource(){
-//
-//        CorsConfiguration config = new CorsConfiguration();
-//        config.addAllowedOrigin("http://localhost:3000");
-//        config.addAllowedOrigin("http://charleybucket.s3-website.ap-northeast-2.amazonaws.com"); //요거 변경하시면 됩니다.
-//        config.addExposedHeader(JwtUtil.AUTHORIZATION_HEADER);
-//        config.addAllowedMethod("*");
-//        config.addAllowedHeader("*");
-//        config.setAllowCredentials(true);
-//        config.validateAllowCredentials();
-//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-//        source.registerCorsConfiguration("/**", config);
-//
-//        return source;
-//    }
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource(){
+
+        CorsConfiguration config = new CorsConfiguration();
+        config.addAllowedOrigin("http://localhost:3000");
+        config.addAllowedOrigin("https://miniprojectmeme.s3.ap-northeast-2.amazonaws.com");
+        config.addAllowedOrigin("http://localhost:8080");               // 허용할 URl (백엔드 테스트 URL)
+        config.addAllowedOrigin("http://54.180.86.147/");               // 허용할 URl (AWS EC2 IP)
+        config.addExposedHeader(JwtUtil.AUTHORIZATION_HEADER);
+        config.addAllowedMethod("*");
+        config.addAllowedHeader("*");
+        config.setAllowCredentials(true);
+        config.validateAllowCredentials();
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", config);
+
+        return source;
+    }
 }
