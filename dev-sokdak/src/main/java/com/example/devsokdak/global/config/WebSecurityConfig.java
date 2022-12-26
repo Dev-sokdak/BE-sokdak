@@ -55,7 +55,7 @@ public class WebSecurityConfig {
                 .anyRequest().authenticated()
                 .and().addFilterBefore(new JwtAuthFilter(jwtUtil), UsernamePasswordAuthenticationFilter.class);
 
-        http.formLogin().loginPage("/api/user/login-page").permitAll();
+//        http.formLogin().loginPage("/api/user/login-page").permitAll();
         // 이 부분에서 login 관련 문제 발생
         // jwt 로그인 방식에서는 세션 로그인 방식을 막아줘야 한다.
         // .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()

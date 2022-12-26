@@ -12,6 +12,7 @@ import com.example.devsokdak.user.entity.User;
 import com.example.devsokdak.user.entity.UserRoleEnum;
 import com.example.devsokdak.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,14 +32,19 @@ public class UserService {
 
     private static final String ADMIN_TOKEN = "HangHae99NoHangHae130Yes";
 
+    private static int signUpType = 0;
+
     // 회원가입
     @Transactional
     public MsgResponseDto signup(SignupRequestDto signupRequestDto) {
-        String username = signupRequestDto.getUsername();
+
+        String nickname = RandomStringUtils.random(15, true, true);                         // 닉네임 랜덤 생성
+
+        String userId = signupRequestDto.getUserId();
         String password = passwordEncoder.encode(signupRequestDto.getPassword());
 
         // 중복 닉네임
-        Optional<User> found = userRepository.findByUsername(username);
+        Optional<User> found = userRepository.findByUserId(userId);
         if (found.isPresent()) {
             throw new CustomException(ErrorCode.ALREADY_EXIST_USERNAME);
         }
@@ -52,7 +58,7 @@ public class UserService {
             role = UserRoleEnum.ADMIN;
         }
 
-        User user = new User(username, password, role);
+        User user = new User(userId, password, nickname, signUpType, role);
         userRepository.save(user);
         return new MsgResponseDto(SuccessCode.SIGN_UP);
     }
@@ -60,11 +66,11 @@ public class UserService {
     // 로그인
     @Transactional(readOnly = true)
     public MsgResponseDto login(LoginRequestDto loginRequestDto, HttpServletResponse response) {
-        String username = loginRequestDto.getUsername();
+        String userId = loginRequestDto.getUserId();
         String password = loginRequestDto.getPassword();
 
         // 사용자 확인
-        User user = userRepository.findByUsername(username).orElseThrow(
+        User user = userRepository.findByUserId(userId).orElseThrow(
                 () -> new CustomException(ErrorCode.NO_EXIST_USER));
 
         // 비밀번호 확인
