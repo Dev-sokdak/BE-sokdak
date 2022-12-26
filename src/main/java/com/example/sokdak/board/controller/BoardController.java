@@ -9,7 +9,6 @@ import com.example.sokdak.global.exception.SuccessCode;
 import com.example.sokdak.global.security.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,16 +21,13 @@ import java.util.List;
 @RequestMapping("/api")
 
 public class BoardController {
-
     private final BoardService boardService;
-
     @PostMapping(value = "/board", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
     public BoardResponseDto createBoard(@AuthenticationPrincipal UserDetailsImpl userDetails,
                                         @RequestPart BoardRequestDto request,
                                         @RequestPart("image") MultipartFile multipartFile) throws IOException {
         return boardService.createBoard(request, userDetails.getUser(), multipartFile);
     }
-
     //게시글 수정
     @PutMapping("/boards/{boardId}")
     public BoardResponseDto updateBoard(@AuthenticationPrincipal UserDetailsImpl userDetails,
@@ -40,29 +36,21 @@ public class BoardController {
                                         @RequestPart(value = "image" ,required = false) MultipartFile multipartFile) throws IOException {
         return boardService.updateBoard(userDetails.getUser(), boardId, request, multipartFile);
     }
-
-
     // 게시글 전체 조회
     @GetMapping("/boards")
     public List<BoardResponseDto> getListBoards() {
         return boardService.getListBoards();
     }
-
     //카테고리 별 조회
     @GetMapping("/boards/category")
-    public List<BoardResponseDto> getCategoryBoards(@RequestParam int interestTag) {
+    public List<BoardResponseDto> getCategoryBoards(@RequestParam("interestTag") int interestTag) {
         return boardService.getCategoryBoards(interestTag);
     }
-
-
     // 게시글 상세 조회 boardId
     @GetMapping("/boards/{boardId}")
     public BoardResponseDto getBoards(@PathVariable Long boardId, @AuthenticationPrincipal UserDetailsImpl userDetails) {
         return boardService.getBoard(boardId, userDetails.getUser());
     }
-
-
-
     // 게시글 삭제
     @DeleteMapping("/boards/{boardId}")
     public MsgResponseDto deleteBoard(@PathVariable Long boardId, @AuthenticationPrincipal UserDetailsImpl userDetails) {
@@ -70,19 +58,11 @@ public class BoardController {
         return new MsgResponseDto(SuccessCode.DELETE_BOARD);
     }
 
-    // 게시글 좋아요
+    //게시글 좋아요 기능
     @PostMapping("/boards/{boardId}/boardLike")
-    public ResponseEntity<MsgResponseDto> saveBoardLike(
+    public MsgResponseDto saveBoardLike(
             @PathVariable Long boardId,
             @AuthenticationPrincipal UserDetailsImpl userDetails) {
-        return ResponseEntity.ok().body(boardService.saveBoardLike(boardId, userDetails.getUser()));
-    }
-
-    // 게시글 좋아요 취소
-    @DeleteMapping("/boards/{boardId}/boardLike")
-    public ResponseEntity<MsgResponseDto> cancelBoardLike(
-            @PathVariable Long boardId,
-            @AuthenticationPrincipal UserDetailsImpl userDetails) {
-        return ResponseEntity.ok().body(boardService.cancelBoardLike(boardId, userDetails.getUser()));
+        return boardService.boardLike(boardId, userDetails.getUser());
     }
 }

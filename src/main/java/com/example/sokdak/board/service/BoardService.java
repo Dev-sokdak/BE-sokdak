@@ -25,7 +25,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -34,8 +33,6 @@ public class BoardService {
     private final BoardRepository boardRepository;
     private final LikeRepository likeRepository;
     private final S3Uploader s3Uploader;
-
-
     //게시글 생성
     @Transactional
     public BoardResponseDto createBoard(BoardRequestDto requestDto, User user, MultipartFile multipartFile) throws IOException {
@@ -47,7 +44,6 @@ public class BoardService {
 
         return new BoardResponseDto(board, image);
     }
-
     //게시글 전체 출력
     @Transactional(readOnly = true)
     public List<BoardResponseDto> getListBoards() {
@@ -55,13 +51,14 @@ public class BoardService {
         List<BoardResponseDto> boardResponseDto = new ArrayList<>();
 
         for (Board board : boardList) {
+            Long likeCnt = likeRepository.likeCnt(board.getId());
             String image = board.getImage();
             List<CommentResponseDto> commentList = new ArrayList<>();
             for (Comment comment : board.getCommentList()) {
                 commentList.add(new CommentResponseDto(comment));
             }
 
-            boardResponseDto.add(new BoardResponseDto(board, commentList, image));
+            boardResponseDto.add(new BoardResponseDto(board, commentList, image,likeCnt));
         }
         return boardResponseDto;
     }
@@ -70,18 +67,17 @@ public class BoardService {
         if (InterestTag.valueOfInterestTag(interestTag) == null) {
             throw new CustomException(ErrorCode.NO_EXIST_LOCAL);
         }
-        List<Board> boardList = new ArrayList<>();
-        Board board = boardRepository.findByCategory(interestTag);
-        boardList.add(board);
+        List<Board> boardList = boardRepository.findAllByCategoryOrderByCreatedAtDesc(interestTag);
 
         List<BoardResponseDto> boardResponseDto = new ArrayList<>();
-        for (Board boards : boardList) {
-            String image = boards.getImage();
+        for (Board board : boardList) {
+            Long likeCnt = likeRepository.likeCnt(board.getId());
+            String image = board.getImage();
             List<CommentResponseDto> commentList = new ArrayList<>();
-            for (Comment comment : boards.getCommentList()) {
+            for (Comment comment : board.getCommentList()) {
                 commentList.add(new CommentResponseDto(comment));
             }
-            boardResponseDto.add(new BoardResponseDto(boards, commentList, image));
+            boardResponseDto.add(new BoardResponseDto(board, commentList, image,likeCnt));
         }
         return boardResponseDto;
     }
@@ -91,12 +87,13 @@ public class BoardService {
         Board board = boardRepository.findById(id).orElseThrow(
                 () -> new CustomException(ErrorCode.NO_BOARD_FOUND)
         );
+        Long likeCnt = likeRepository.likeCnt(board.getId());
         String image = board.getImage();
         List<CommentResponseDto> commentList = new ArrayList<>();
         for (Comment comment : board.getCommentList()) {
             commentList.add(new CommentResponseDto(comment));
         }
-        return new BoardResponseDto(board, commentList,image);
+        return new BoardResponseDto(board, commentList,image,likeCnt);
     }
     //게시글 업데이트 /*이미지 수정 필요*/
     @Transactional
@@ -120,8 +117,6 @@ public class BoardService {
         if (InterestTag.valueOfInterestTag(requestDto.getCategory()) == null) {
             throw new CustomException(ErrorCode.NO_EXIST_LOCAL);
         }
-
-
         String image = null;
             if (!multipartFile.isEmpty()) { // 사진이 수정된 경우
                 image=(s3Uploader.upload(multipartFile, "static")); // 새로들어온 이미지 s3 저장
@@ -154,34 +149,19 @@ public class BoardService {
 
         boardRepository.delete(board);
     }
-
-    @Transactional(readOnly = true)
-    public boolean checkBoardLike(Long boardId, User user) {
-        Optional<BoardLike> Like = likeRepository.findByBoardIdAndUserId(boardId, user.getId());
-        return Like.isPresent();
-    }
-
     @Transactional
-    public MsgResponseDto saveBoardLike(Long boardId, User user) {
+    public MsgResponseDto boardLike(Long boardId, User user){
         Board board = boardRepository.findById(boardId).orElseThrow(
-                () -> new CustomException(ErrorCode.NO_BOARD_FOUND)
+                ()->new CustomException(ErrorCode.NO_BOARD_FOUND)
         );
-        if (checkBoardLike(boardId, user)) {
-            throw new CustomException(ErrorCode.ALREADY_CLICKED_LIKE);
+        if(likeRepository.findByBoardIdAndUserId(boardId, user.getId()).isEmpty()){ // 보드라이크에 값이 있는지 확인
+            likeRepository.save(new BoardLike(board, user)); // 없으면 저장
+            return new MsgResponseDto(SuccessCode.LIKE);
         }
-        likeRepository.saveAndFlush(new BoardLike(board, user));
-        return new MsgResponseDto(SuccessCode.LIKE);
-    }
+        else {
+            likeRepository.deleteByBoardIdAndUserId(board.getId(),user.getId());// 있으면 삭제
+            return new MsgResponseDto(SuccessCode.CANCEL_LIKE);
+        }
 
-    @Transactional
-    public MsgResponseDto cancelBoardLike(Long boardId, User user) {
-        boardRepository.findById(boardId).orElseThrow(
-                () -> new CustomException(ErrorCode.NO_BOARD_FOUND)
-        );
-        if (!checkBoardLike(boardId, user)) {
-            throw new CustomException(ErrorCode.ALERADY_CANCEL_LIKE);
-        }
-        likeRepository.deleteByBoardIdAndUserId(boardId, user.getId());
-        return new MsgResponseDto(SuccessCode.CANCEL_LIKE);
     }
 }
