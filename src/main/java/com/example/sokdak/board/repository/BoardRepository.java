@@ -11,7 +11,7 @@ public interface BoardRepository  extends JpaRepository<Board, Long> {
 
     List<Board> findAllByOrderByCreatedAtDesc();
 
-    Board findByCategory(int intersetTag);
+    Board findByCategory(int interestTag);
     Optional<Board> findByIdAndNickname(Long id, String nickname);
 
 }

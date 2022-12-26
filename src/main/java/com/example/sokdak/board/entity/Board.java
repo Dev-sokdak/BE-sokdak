@@ -26,7 +26,7 @@ public class Board extends TimeStamped {
     private String nickname;                                 // 작성자 닉네임
     @Column(nullable = false)                               // 게시판 이미지는 0개 이상, 1개 이하로 Null 값 허용
     private String image;                                   // s3 Upload Url
-    @OneToMany(mappedBy = "board")                          // Board(1) <-> reply(n) 양방향 관계
+    @OneToMany(mappedBy = "board", cascade = CascadeType.REMOVE)// Board(1) <-> reply(n) 양방향 관계
     private List<Comment> commentList;
     private int category;
     public Board(BoardRequestDto requestDto, User user, String image) {
@@ -49,5 +49,9 @@ public class Board extends TimeStamped {
         this.title = requestDto.getTitle();
         this.content = requestDto.getContent();
         this.category = requestDto.getCategory();
+    }
+
+    public void update(String image){
+        this.image = image;
     }
 }
