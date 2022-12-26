@@ -37,11 +37,4 @@ public class UserController {
 
         return new MsgResponseDto(SuccessCode.LOG_IN);
     }
-
-
-
-    @PostMapping("forbidden")
-    public ModelAndView forbidden() {
-        return new ModelAndView("forbidden");
-    }
 }

@@ -23,7 +23,7 @@ public class BoardResponseDto {
     private String nickname;
     private int boardLike;
     private String image;
-    private List<Category> category;
+    private int category;
     private List<CommentResponseDto> commentList = new ArrayList<>();
     private LocalDateTime createdAt;
     private LocalDateTime modifiedAt;
@@ -36,7 +36,7 @@ public class BoardResponseDto {
         this.content = board.getContent();
         this.nickname = board.getNickname();
         this.image = image;
-        this.category = board.getCategoryList();
+        this.category = board.getCategory();
         this.createdAt = board.getCreatedAt();
         this.modifiedAt = board.getModifiedAt();
     }
@@ -47,7 +47,7 @@ public class BoardResponseDto {
         this.content = board.getContent();
         this.nickname = board.getNickname();
         this.image = image;
-        this.category = board.getCategoryList();
+        this.category = board.getCategory();
         this.commentList = commentList;
         this.createdAt = board.getCreatedAt();
         this.modifiedAt = board.getModifiedAt();

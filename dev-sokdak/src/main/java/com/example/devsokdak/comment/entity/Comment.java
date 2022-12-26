@@ -28,7 +28,7 @@ public class Comment extends TimeStamped {
     private Board board;                                                // 게시글 Id
 
     @ManyToOne
-    @JoinColumn(name = "USER_ID")
+    @JoinColumn(name = "USERS_ID")
     private User user;
 
     public Comment(CommentRequestDto commentRequestDto, Board board, User user){

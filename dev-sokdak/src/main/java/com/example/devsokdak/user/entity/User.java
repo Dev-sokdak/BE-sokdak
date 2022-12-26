@@ -16,7 +16,7 @@ public class User {
     @Column(nullable = false)
     private String password;                                // 사용자 Password
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String nickname;                                // 사용자 닉네임 (랜덤 난수로 닉네임 생성하여 저장)
 
     @Column(nullable = false)
