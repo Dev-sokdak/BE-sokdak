@@ -5,10 +5,8 @@ import com.example.sokdak.board.dto.BoardRequestDto;
 import com.example.sokdak.board.dto.BoardResponseDto;
 import com.example.sokdak.board.entity.Board;
 import com.example.sokdak.board.entity.BoardLike;
-import com.example.sokdak.board.entity.Category;
 import com.example.sokdak.board.entity.InterestTag;
 import com.example.sokdak.board.repository.BoardRepository;
-import com.example.sokdak.board.repository.CategoryRepository;
 import com.example.sokdak.board.repository.LikeRepository;
 import com.example.sokdak.comment.dto.CommentResponseDto;
 import com.example.sokdak.comment.entity.Comment;
@@ -34,7 +32,6 @@ import java.util.Optional;
 public class BoardService {
 
     private final BoardRepository boardRepository;
-    private final CategoryRepository categoryRepository;
     private final LikeRepository likeRepository;
     private final S3Uploader s3Uploader;
 
@@ -47,7 +44,6 @@ public class BoardService {
             image=s3Uploader.upload( multipartFile, "static");
         }
         Board board = boardRepository.save(new Board(requestDto, user,image));
-        categoryRepository.save(new Category(board,requestDto.getCategory()));
 
         return new BoardResponseDto(board, image);
     }
@@ -104,9 +100,8 @@ public class BoardService {
     }
     //게시글 업데이트 /*이미지 수정 필요*/
     @Transactional
-    public BoardResponseDto updateBoard(User user, Long id, BoardRequestDto requestDto, List<MultipartFile> multipartFile) throws IOException {
+    public BoardResponseDto updateBoard(User user, Long id, BoardRequestDto requestDto,MultipartFile multipartFile) throws IOException {
         Board board;
-
         if (user.getRole().equals(UserRoleEnum.ADMIN)) {
             board = boardRepository.findById(id).orElseThrow(
                     () -> new CustomException(ErrorCode.NO_BOARD_FOUND)
@@ -126,32 +121,19 @@ public class BoardService {
             throw new CustomException(ErrorCode.NO_EXIST_LOCAL);
         }
 
+
         String image = null;
-        /*List<String> image = new ArrayList<>();
-        for (MultipartFile multipart : multipartFile) {
-            if (!multipart.isEmpty()) { // 사진이 수정된 경우
-                image.add(s3Uploader.upload(multipart, "static")); // 새로들어온 이미지 s3 저장
+            if (!multipartFile.isEmpty()) { // 사진이 수정된 경우
+                image=(s3Uploader.upload(multipartFile, "static")); // 새로들어온 이미지 s3 저장
 
-                List<Image> listImage = imageRepository.findByBoardId(board.getId());
+                Board board1 = boardRepository.findById(id).orElseThrow();
 
-                for (Image oneImage : listImage) { // s3 이미지 삭제
-                    String selectImage = oneImage.getImage();
+                s3Uploader.delete(board1.getImage(), "static");
 
-                    String fileName = selectImage.substring(57);
+                board1.update(image);
 
-                    s3Uploader.delete(fileName, "static");
-                }
-
-                imageRepository.deleteAll(listImage); // image 테이블에서 이미지 삭제
-
-                for (String selectImage : image) { // 새로 들어온 이미지 테이블에 저장
-                    imageRepository.save(new Image(selectImage, board));
-                }
-            }
-        }*/
-
+        }
         return new BoardResponseDto(board, commentList, image);
-
     }
     //게시글 삭제 /*이미지 부분 수정 필요*/
     @Transactional
@@ -166,14 +148,9 @@ public class BoardService {
                     () -> new CustomException(ErrorCode.NO_BOARD_FOUND)
             );
         }
+        Board board1 = boardRepository.findById(id).orElseThrow();
 
-      /*  List<Image> images = imageRepository.findByBoardId(board.getId());
-
-        for (Image image : images) {
-            String selectImage = image.getImage();
-            String fileName = selectImage.substring(69);
-            s3Uploader.delete(fileName, "static");
-        }*/
+        s3Uploader.delete(board1.getImage(), "static");
 
         boardRepository.delete(board);
     }

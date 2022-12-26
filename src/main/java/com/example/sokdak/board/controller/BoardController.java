@@ -36,9 +36,9 @@ public class BoardController {
     @PutMapping("/boards/{boardId}")
     public BoardResponseDto updateBoard(@AuthenticationPrincipal UserDetailsImpl userDetails,
                                         @PathVariable Long boardId,
-                                        @RequestPart BoardRequestDto requestDto,
-                                        @RequestPart("image") List<MultipartFile> multipartFile) throws IOException {
-        return boardService.updateBoard(userDetails.getUser(), boardId, requestDto, multipartFile);
+                                        @RequestPart BoardRequestDto request,
+                                        @RequestPart(value = "image" ,required = false) MultipartFile multipartFile) throws IOException {
+        return boardService.updateBoard(userDetails.getUser(), boardId, request, multipartFile);
     }
 
 
