@@ -21,6 +21,7 @@ public class BoardResponseDto {
     private int boardLike;
     private String image;
     private int category;
+    private Long likeCnt;
     private List<CommentResponseDto> commentList = new ArrayList<>();
     private LocalDateTime createdAt;
     private LocalDateTime modifiedAt;
@@ -46,6 +47,19 @@ public class BoardResponseDto {
         this.image = image;
         this.category = board.getCategory();
         this.commentList = commentList;
+        this.createdAt = board.getCreatedAt();
+        this.modifiedAt = board.getModifiedAt();
+    }
+
+    public BoardResponseDto(Board board, List<CommentResponseDto> commentList, String image, Long likeCnt) {
+        this.id = board.getId();            //this.id: (위에서 선언된) 필드, Board 객체의 board 매개변수로 들어온 데이터를 getId() 에 담는다(Client 에게로 보내기 위해)
+        this.title = board.getTitle();
+        this.content = board.getContent();
+        this.nickname = board.getNickname();
+        this.image = image;
+        this.category = board.getCategory();
+        this.commentList = commentList;
+        this.likeCnt = likeCnt;
         this.createdAt = board.getCreatedAt();
         this.modifiedAt = board.getModifiedAt();
     }

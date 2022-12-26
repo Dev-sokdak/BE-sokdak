@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
-@Entity(name = "likes")
+@Entity(name = "BoardLike")
 @Getter
 @NoArgsConstructor
 public class BoardLike {
