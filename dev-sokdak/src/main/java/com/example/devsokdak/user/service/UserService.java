@@ -73,6 +73,10 @@ public class UserService {
         User user = userRepository.findByUserId(userId).orElseThrow(
                 () -> new CustomException(ErrorCode.NO_EXIST_USER));
 
+        if(user.getSignUpType() != signUpType){
+            throw new CustomException(ErrorCode.NO_LOCAL_USER);
+        }
+
         // 비밀번호 확인
         if(!passwordEncoder.matches(password, user.getPassword())){
             throw new CustomException(ErrorCode.DISMATCH_PASSWORD);
