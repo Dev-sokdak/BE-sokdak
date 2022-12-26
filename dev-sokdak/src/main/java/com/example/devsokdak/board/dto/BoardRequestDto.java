@@ -15,5 +15,6 @@ import java.util.List;
 public class BoardRequestDto {
     private String title;
     private String content;
-    private List<Integer> categoryList;
+    private int category;
+
 }

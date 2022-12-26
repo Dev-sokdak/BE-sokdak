@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Entity(name = "likes")
 @Getter
 @NoArgsConstructor
-public class Like {
+public class BoardLike {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -21,7 +21,7 @@ public class Like {
     @JoinColumn(name = "Board_Id", nullable = false)                  // category(n) <-> Board(1) 단방향 관계
     private Board board;                                              // 좋아요 게시물 Id
 
-    public Like(Board board, User user) {
+    public BoardLike(Board board, User user) {
         this.board = board;
         this.user = user;
     }

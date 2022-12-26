@@ -28,12 +28,5 @@ public enum InterestTag {
                 .findAny()
                 .orElse(null);
     }
-    public static InterestTag valueOfInterestTag(List<Integer> integerList){
-        return Arrays.stream(values())
-                .filter(value -> value.interestTag==(integerList.get(0)))
-                .filter(value -> value.interestTag==(integerList.get(1)))
-                .filter(value -> value.interestTag==(integerList.get(2)))
-                .findAny()
-                .orElse(null);
-    }
+
 }

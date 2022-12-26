@@ -6,7 +6,7 @@ import com.example.devsokdak.board.dto.BoardResponseDto;
 import com.example.devsokdak.board.entity.Board;
 import com.example.devsokdak.board.entity.Category;
 import com.example.devsokdak.board.entity.InterestTag;
-import com.example.devsokdak.board.entity.Like;
+import com.example.devsokdak.board.entity.BoardLike;
 import com.example.devsokdak.board.repository.BoardRepository;
 import com.example.devsokdak.board.repository.CategoryRepository;
 import com.example.devsokdak.board.repository.LikeRepository;
@@ -24,7 +24,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,9 +47,8 @@ public class BoardService {
             image=s3Uploader.upload( multipartFile, "static");
         }
         Board board = boardRepository.save(new Board(requestDto, user,image));
-        for(int category : requestDto.getCategoryList()){
-            categoryRepository.save(new Category(board,category));
-        }
+        categoryRepository.save(new Category(board,requestDto.getCategory()));
+
         return new BoardResponseDto(board, image);
     }
 
@@ -76,20 +74,18 @@ public class BoardService {
         if (InterestTag.valueOfInterestTag(interestTag) == null) {
             throw new CustomException(ErrorCode.NO_EXIST_LOCAL);
         }
-        List<Category> categoryList = categoryRepository.findAllByInterestTag(interestTag);
         List<Board> boardList = new ArrayList<>();
-        for(Category category : categoryList){
-            Board board = boardRepository.findByCategoryListId(category.getId());
-            boardList.add(board);
-        }
+        Board board = boardRepository.findByCategory(interestTag);
+        boardList.add(board);
+
         List<BoardResponseDto> boardResponseDto = new ArrayList<>();
-        for (Board board : boardList) {
-            String image = board.getImage();
+        for (Board boards : boardList) {
+            String image = boards.getImage();
             List<CommentResponseDto> commentList = new ArrayList<>();
-            for (Comment comment : board.getCommentList()) {
+            for (Comment comment : boards.getCommentList()) {
                 commentList.add(new CommentResponseDto(comment));
             }
-            boardResponseDto.add(new BoardResponseDto(board, commentList, image));
+            boardResponseDto.add(new BoardResponseDto(boards, commentList, image));
         }
         return boardResponseDto;
     }
@@ -116,7 +112,7 @@ public class BoardService {
                     () -> new CustomException(ErrorCode.NO_BOARD_FOUND)
             );
         } else {
-            board = boardRepository.findByIdAndUserId(id, user.getId()).orElseThrow(
+            board = boardRepository.findByIdAndNickname(id, user.getNickname()).orElseThrow(
                     () -> new CustomException(ErrorCode.NO_BOARD_FOUND)
             );
         }
@@ -126,7 +122,7 @@ public class BoardService {
         for (Comment comment : board.getCommentList()) {
             commentList.add(new CommentResponseDto(comment));
         }
-        if (InterestTag.valueOfInterestTag(requestDto.getCategoryList()) == null) {
+        if (InterestTag.valueOfInterestTag(requestDto.getCategory()) == null) {
             throw new CustomException(ErrorCode.NO_EXIST_LOCAL);
         }
 
@@ -166,7 +162,7 @@ public class BoardService {
                     () -> new CustomException(ErrorCode.NO_BOARD_FOUND)
             );
         } else {
-            board = boardRepository.findByIdAndUserId(id, user.getId()).orElseThrow(
+            board = boardRepository.findByIdAndNickname(id, user.getNickname()).orElseThrow(
                     () -> new CustomException(ErrorCode.NO_BOARD_FOUND)
             );
         }
@@ -184,7 +180,7 @@ public class BoardService {
 
     @Transactional(readOnly = true)
     public boolean checkBoardLike(Long boardId, User user) {
-        Optional<Like> Like = likeRepository.findByBoardIdAndUserId(boardId, user.getId());
+        Optional<BoardLike> Like = likeRepository.findByBoardIdAndUserId(boardId, user.getId());
         return Like.isPresent();
     }
 
@@ -196,7 +192,7 @@ public class BoardService {
         if (checkBoardLike(boardId, user)) {
             throw new CustomException(ErrorCode.ALREADY_CLICKED_LIKE);
         }
-        likeRepository.saveAndFlush(new Like(board, user));
+        likeRepository.saveAndFlush(new BoardLike(board, user));
         return new MsgResponseDto(SuccessCode.LIKE);
     }
 
