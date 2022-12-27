@@ -29,15 +29,16 @@ public class User {
     private String profileImage;                            // 프로필 사진 Url (S3 Path)
 
     @Column(nullable = true)
-    private int jobTag;                                     // 직업 태그 ( 0 : 웹개발자, 1 : 서버 개발자, 2: 프론트앤드 개발자, 3: QA 테스트엔지니어, 4: DevOps/시스템관리자)
+    private String jobTag;                                  // 직업 태그 ( 0 : 웹개발자, 1 : 서버 개발자, 2: 프론트앤드 개발자, 3: QA 테스트엔지니어, 4: DevOps/시스템관리자)
 
     @Column(nullable = true)
-    private int career;                                    // 경력 태그 ( 0 : 신입, 1: 1년 이상 , ... , 10 : 10년 이상)
+    private String careerTag;                               // 경력 태그 ( 0 : 신입, 1: 1년 이상 , ... , 10 : 10년 이상)
 
     @Column(nullable = false)
     @Enumerated(value = EnumType.STRING)
     private UserRoleEnum role;
 
+    // 카카오 User용 생성자
     public User(String userId, String password, String nickname, int signUpType, UserRoleEnum role) {
         this.userId = userId;
         this.password = password;
@@ -45,6 +46,18 @@ public class User {
         this.signUpType = signUpType;
         this.role = role;
     }
+
+    // 일반 User용 생성자
+    public User(String userId, String password, String nickname, String jobTag, String careerTag, int signUpType, UserRoleEnum role) {
+        this.userId = userId;
+        this.password = password;
+        this.nickname = nickname;
+        this.jobTag = jobTag;
+        this.careerTag = careerTag;
+        this.signUpType = signUpType;
+        this.role = role;
+    }
+
 
     public void update(int signUpType){
         this.signUpType = signUpType;
