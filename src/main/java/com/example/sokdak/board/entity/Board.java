@@ -5,6 +5,7 @@ import com.example.sokdak.board.dto.BoardRequestDto;
 import com.example.sokdak.comment.entity.Comment;
 import com.example.sokdak.global.entity.TimeStamped;
 import com.example.sokdak.user.entity.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
@@ -28,20 +29,13 @@ public class Board extends TimeStamped {
     private String image;                                   // s3 Upload Url
     @OneToMany(mappedBy = "board", cascade = CascadeType.REMOVE)// Board(1) <-> reply(n) 양방향 관계
     private List<Comment> commentList;
+
     private int category;
     public Board(BoardRequestDto requestDto, User user, String image) {
         this.title = requestDto.getTitle();
         this.content = requestDto.getContent();
         this.nickname = user.getNickname();
         this.image = image;
-        this.category = requestDto.getCategory();
-    }
-    public Board(BoardRequestDto requestDto, User user, String image, List<Comment> commentList) {
-        this.title = requestDto.getTitle();
-        this.content = requestDto.getContent();
-        this.nickname = user.getNickname();
-        this.image = image;
-        this.commentList = commentList;
         this.category = requestDto.getCategory();
     }
 

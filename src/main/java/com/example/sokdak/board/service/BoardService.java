@@ -93,7 +93,14 @@ public class BoardService {
         for (Comment comment : board.getCommentList()) {
             commentList.add(new CommentResponseDto(comment));
         }
-        return new BoardResponseDto(board, commentList,image,likeCnt);
+        boolean boardlike;
+        if(likeRepository.findByBoardIdAndUserId(id, user.getId()).isPresent()){
+            boardlike = true;
+        }else {
+            boardlike = false;
+        }
+        return new BoardResponseDto(board, commentList,image,likeCnt,boardlike);
+
     }
     //게시글 업데이트 /*이미지 수정 필요*/
     @Transactional
