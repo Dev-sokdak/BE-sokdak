@@ -41,6 +41,7 @@ public class BoardController {
     public List<BoardResponseDto> getListBoards() {
         return boardService.getListBoards();
     }
+
     //카테고리 별 조회
     @GetMapping("/boards/category")
     public List<BoardResponseDto> getCategoryBoards(@RequestParam("interestTag") int interestTag) {
