@@ -16,6 +16,8 @@ public class CommentResponseDto {
     private LocalDateTime modifiedat;
     private LocalDateTime createdat;
 
+    private Boolean commentIscorrect;
+
     //생성자
     public CommentResponseDto(Comment comment) {
         this.boardId = comment.getBoard().getId();
@@ -24,5 +26,15 @@ public class CommentResponseDto {
         this.comment = comment.getContent();
         this.modifiedat = comment.getModifiedAt();
         this.createdat = comment.getModifiedAt();
+    }
+
+    public CommentResponseDto(Comment comment, Boolean commentIscorrect) {
+        this.boardId = comment.getBoard().getId();
+        this.commentId = comment.getId();
+        this.userId = comment.getUserId();
+        this.comment = comment.getContent();
+        this.modifiedat = comment.getModifiedAt();
+        this.createdat = comment.getModifiedAt();
+        this.commentIscorrect = commentIscorrect;
     }
 }
