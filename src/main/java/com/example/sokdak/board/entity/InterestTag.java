@@ -27,5 +27,10 @@ public enum InterestTag {
                 .findAny()
                 .orElse(null);
     }
-
+    public static InterestTag valueOfInterestTag(String TagMsg){
+        return Arrays.stream(values())
+                .filter(value -> value.TagMsg.equals(TagMsg))
+                .findAny()
+                .orElse(null);
+    }
 }

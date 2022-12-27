@@ -22,7 +22,7 @@ public class BoardResponseDto {
     private String nickname;
     private boolean boardLikeUserId;
     private String image;
-    private String category;
+    private int category;
     private Long likeCnt;
     private String userCareerTag;
     private String userJobTag;
@@ -40,7 +40,7 @@ public class BoardResponseDto {
         this.content = board.getContent();
         this.nickname = board.getNickname();
         this.image = image;
-        this.category = InterestTag.valueOfInterestTag(board.getCategory()).getTagMsg();
+        this.category = InterestTag.valueOfInterestTag(board.getCategory()).getInterestTag();
         this.createdAt = board.getCreatedAt();
         this.modifiedAt = board.getModifiedAt();
     }
@@ -51,7 +51,7 @@ public class BoardResponseDto {
         this.content = board.getContent();
         this.nickname = board.getNickname();
         this.image = image;
-        this.category = InterestTag.valueOfInterestTag(board.getCategory()).getTagMsg();
+        this.category = InterestTag.valueOfInterestTag(board.getCategory()).getInterestTag();
         this.commentList = commentList;
         this.createdAt = board.getCreatedAt();
         this.modifiedAt = board.getModifiedAt();
@@ -63,7 +63,7 @@ public class BoardResponseDto {
         this.content = board.getContent();
         this.nickname = board.getNickname();
         this.image = image;
-        this.category = InterestTag.valueOfInterestTag(board.getCategory()).getTagMsg();
+        this.category = InterestTag.valueOfInterestTag(board.getCategory()).getInterestTag();
         this.likeCnt = likeCnt;
         this.userCareerTag = board.getUser().getCareerTag();
         this.userJobTag = board.getUser().getJobTag();
@@ -77,7 +77,7 @@ public class BoardResponseDto {
         this.content = board.getContent();
         this.nickname = board.getNickname();
         this.image = image;
-        this.category = InterestTag.valueOfInterestTag(board.getCategory()).getTagMsg();
+        this.category = InterestTag.valueOfInterestTag(board.getCategory()).getInterestTag();
         this.likeCnt = likeCnt;
         this.boardLikeUserId=boardlike;
         this.userCareerTag = board.getUser().getCareerTag();
