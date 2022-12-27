@@ -32,20 +32,20 @@ public class Board extends TimeStamped {
     @ManyToOne
     private User user;
 
-    private int category;
+    private String category;
     public Board(BoardRequestDto requestDto, User user, String image) {
         this.title = requestDto.getTitle();
         this.content = requestDto.getContent();
         this.nickname = user.getNickname();
         this.image = image;
-        this.category = requestDto.getCategory();
+        this.category = InterestTag.valueOfInterestTag(requestDto.getCategory()).getTagMsg();
         this.user = user;
     }
 
     public void update(BoardRequestDto requestDto){
         this.title = requestDto.getTitle();
         this.content = requestDto.getContent();
-        this.category = requestDto.getCategory();
+        this.category = InterestTag.valueOfInterestTag(requestDto.getCategory()).getTagMsg();
     }
 
     public void update(String image){
