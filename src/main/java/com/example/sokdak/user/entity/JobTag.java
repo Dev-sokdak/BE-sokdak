@@ -15,7 +15,8 @@ public enum JobTag {
     앱개발자(3, "앱 개발자"),
     게임개발자(4, "게임 개발자"),
     QA(5, "QA"),
-    DevOps(6, "DevOps");
+    DevOps(6, "DevOps"),
+    미설정(999, "직군 미설정");
 
     private final int jobTag;
     private final String TagMsg;

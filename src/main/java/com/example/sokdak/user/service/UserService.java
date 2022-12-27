@@ -42,7 +42,6 @@ public class UserService {
     public MsgResponseDto signup(SignupRequestDto signupRequestDto) {
 
         String nickname = RandomStringUtils.random(15, true, true);                         // 닉네임 랜덤 생성
-
         String userId = signupRequestDto.getUserId();
         String password = passwordEncoder.encode(signupRequestDto.getPassword());
         String jobTag = JobTag.valueOfJobTag(signupRequestDto.getJobTag()).getTagMsg();                         // jobTag Enum에서 입력받은 int value와  일치하는 String 값 반환
