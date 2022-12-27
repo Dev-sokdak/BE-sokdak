@@ -56,12 +56,13 @@ public class BoardService {
 
         for (Board board : boardList) {
             Long likeCnt = likeRepository.likeCnt(board.getId());
+            Long commentCnt = commentRepository.countByBoardId(board.getId());
             String image = board.getImage();
             List<CommentResponseDto> commentList = new ArrayList<>();
             for (Comment comment : board.getCommentList()) {
                 commentList.add(new CommentResponseDto(comment));
             }
-            boardResponseDto.add(new BoardResponseDto(board, commentList, image, likeCnt));
+            boardResponseDto.add(new BoardResponseDto(board, commentList, image, likeCnt, commentCnt));
         }
         return boardResponseDto;
     }
@@ -76,12 +77,13 @@ public class BoardService {
         List<BoardResponseDto> boardResponseDto = new ArrayList<>();
         for (Board board : boardList) {
             Long likeCnt = likeRepository.likeCnt(board.getId());
+            Long commentCnt = commentRepository.countByBoardId(board.getId());
             String image = board.getImage();
             List<CommentResponseDto> commentList = new ArrayList<>();
             for (Comment comment : board.getCommentList()) {
                 commentList.add(new CommentResponseDto(comment));
             }
-            boardResponseDto.add(new BoardResponseDto(board, commentList, image, likeCnt));
+            boardResponseDto.add(new BoardResponseDto(board, commentList, image, likeCnt, commentCnt));
         }
         return boardResponseDto;
     }
