@@ -24,7 +24,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class UserService {
+public class  UserService {
 
     private final UserRepository userRepository;
 
@@ -90,5 +90,10 @@ public class UserService {
         response.addHeader(JwtUtil.AUTHORIZATION_HEADER, jwtUtil.createToken(user.getUserId(), user.getRole()));
         //add header로 헤더에 값 넣어주기 (키, 토큰)
         return new MsgResponseDto(SuccessCode.LOG_IN);
+    }
+
+    // 중복 아이디 체크
+    public boolean checkUserIdDuplicate(String userId){
+        return userRepository.existsByUserId(userId);               // Username이 중복되는 경우 true, 중복되지 않은 경우 False
     }
 }
