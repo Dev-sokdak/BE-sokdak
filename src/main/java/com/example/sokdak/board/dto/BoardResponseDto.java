@@ -2,6 +2,7 @@ package com.example.sokdak.board.dto;
 
 
 import com.example.sokdak.board.entity.Board;
+import com.example.sokdak.board.entity.InterestTag;
 import com.example.sokdak.comment.dto.CommentResponseDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,9 +19,9 @@ public class BoardResponseDto {
     private String title;
     private String content;
     private String nickname;
-    private int boardLike;
+    private boolean boardLikeUserId;
     private String image;
-    private int category;
+    private String category;
     private Long likeCnt;
     private List<CommentResponseDto> commentList = new ArrayList<>();
     private LocalDateTime createdAt;
@@ -34,7 +35,7 @@ public class BoardResponseDto {
         this.content = board.getContent();
         this.nickname = board.getNickname();
         this.image = image;
-        this.category = board.getCategory();
+        this.category = InterestTag.valueOfInterestTag(board.getCategory()).getTagMsg();
         this.createdAt = board.getCreatedAt();
         this.modifiedAt = board.getModifiedAt();
     }
@@ -45,7 +46,7 @@ public class BoardResponseDto {
         this.content = board.getContent();
         this.nickname = board.getNickname();
         this.image = image;
-        this.category = board.getCategory();
+        this.category = InterestTag.valueOfInterestTag(board.getCategory()).getTagMsg();
         this.commentList = commentList;
         this.createdAt = board.getCreatedAt();
         this.modifiedAt = board.getModifiedAt();
@@ -57,9 +58,22 @@ public class BoardResponseDto {
         this.content = board.getContent();
         this.nickname = board.getNickname();
         this.image = image;
-        this.category = board.getCategory();
+        this.category = InterestTag.valueOfInterestTag(board.getCategory()).getTagMsg();
         this.commentList = commentList;
         this.likeCnt = likeCnt;
+        this.createdAt = board.getCreatedAt();
+        this.modifiedAt = board.getModifiedAt();
+    }
+    public BoardResponseDto(Board board, List<CommentResponseDto> commentList, String image, Long likeCnt,boolean boardlike) {
+        this.id = board.getId();            //this.id: (위에서 선언된) 필드, Board 객체의 board 매개변수로 들어온 데이터를 getId() 에 담는다(Client 에게로 보내기 위해)
+        this.title = board.getTitle();
+        this.content = board.getContent();
+        this.nickname = board.getNickname();
+        this.image = image;
+        this.category = InterestTag.valueOfInterestTag(board.getCategory()).getTagMsg();
+        this.commentList = commentList;
+        this.likeCnt = likeCnt;
+        this.boardLikeUserId=boardlike;
         this.createdAt = board.getCreatedAt();
         this.modifiedAt = board.getModifiedAt();
     }

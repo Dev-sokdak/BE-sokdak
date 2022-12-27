@@ -10,15 +10,16 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum InterestTag {
 
-    개발(0),
-    IT기술(1),
-    디자인(2),
-    경영전략(3),
-    CSCX(4),
-    MD컨텐츠제작(5),
-    HR(6);
+    개발(0,"개발"),
+    IT기술(1,"IT기술"),
+    디자인(2,"디자인"),
+    경영전략(3,"경영전략"),
+    CSCX(4,"CSCX"),
+    MD컨텐츠제작(5,"MD컨텐츠제작"),
+    HR(6,"HR");
 
     private final int interestTag;
+    private final String TagMsg;
 
     public static InterestTag valueOfInterestTag(int interestTag){
         return Arrays.stream(values())
