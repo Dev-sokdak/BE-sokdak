@@ -29,6 +29,8 @@ public class Board extends TimeStamped {
     private String image;                                   // s3 Upload Url
     @OneToMany(mappedBy = "board", cascade = CascadeType.REMOVE)// Board(1) <-> reply(n) 양방향 관계
     private List<Comment> commentList;
+    @ManyToOne
+    private User user;
 
     private int category;
     public Board(BoardRequestDto requestDto, User user, String image) {
@@ -37,6 +39,7 @@ public class Board extends TimeStamped {
         this.nickname = user.getNickname();
         this.image = image;
         this.category = requestDto.getCategory();
+        this.user = user;
     }
 
     public void update(BoardRequestDto requestDto){
