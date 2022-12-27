@@ -23,7 +23,7 @@ public enum CareerTag {
     Tag_10(10, "10년차 이상");
 
     private final int careerTag;
-    private final String TagMsg;
+    private final String tagMsg;
 
     public static CareerTag valueOfCareerTag(int careerTag){
         return Arrays.stream(values())
@@ -31,4 +31,12 @@ public enum CareerTag {
                 .findAny()
                 .orElse(null);
     }
+
+    public static CareerTag valueOfCareerTag(String tagMsg){
+        return Arrays.stream(values())
+                .filter(value -> value.tagMsg.equals(tagMsg))
+                .findAny()
+                .orElse(null);
+    }
+
 }
