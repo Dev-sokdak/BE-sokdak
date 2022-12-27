@@ -8,6 +8,8 @@ import com.example.sokdak.global.exception.SuccessCode;
 import com.example.sokdak.global.jwt.JwtUtil;
 import com.example.sokdak.user.dto.LoginRequestDto;
 import com.example.sokdak.user.dto.SignupRequestDto;
+import com.example.sokdak.user.entity.CareerTag;
+import com.example.sokdak.user.entity.JobTag;
 import com.example.sokdak.user.entity.User;
 import com.example.sokdak.user.entity.UserRoleEnum;
 import com.example.sokdak.user.repository.UserRepository;
@@ -30,6 +32,7 @@ public class UserService {
 
     private final PasswordEncoder passwordEncoder;
 
+
     private static final String ADMIN_TOKEN = "HangHae99NoHangHae130Yes";
 
     private static int signUpType = 0;
@@ -42,6 +45,8 @@ public class UserService {
 
         String userId = signupRequestDto.getUserId();
         String password = passwordEncoder.encode(signupRequestDto.getPassword());
+        String jobTag = JobTag.valueOfJobTag(signupRequestDto.getJobTag()).getTagMsg();                         // jobTag Enum에서 입력받은 int value와  일치하는 String 값 반환
+        String careerTag = CareerTag.valueOfCareerTag(signupRequestDto.getCareerTag()).getTagMsg();             // careerTag Enum에서 입력받은 int value와  일치하는 String 값 반환
 
         // 중복 닉네임
         Optional<User> found = userRepository.findByUserId(userId);
@@ -58,7 +63,7 @@ public class UserService {
             role = UserRoleEnum.ADMIN;
         }
 
-        User user = new User(userId, password, nickname, signUpType, role);
+        User user = new User(userId, password, nickname, jobTag, careerTag, signUpType, role);
         userRepository.save(user);
         return new MsgResponseDto(SuccessCode.SIGN_UP);
     }
