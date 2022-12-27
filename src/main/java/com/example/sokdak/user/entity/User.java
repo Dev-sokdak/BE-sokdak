@@ -58,8 +58,16 @@ public class User {
         this.role = role;
     }
 
-
     public void update(int signUpType){
         this.signUpType = signUpType;
+    }
+
+    public void updateProfile(String profileImage){
+        this.profileImage = profileImage;
+    }
+
+    public void updateJobCareerTag(String jobTag,String careerTag){
+        this.jobTag = jobTag;
+        this.careerTag = careerTag;
     }
 }

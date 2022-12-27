@@ -12,6 +12,9 @@ public enum SuccessCode {
     LOG_IN(HttpStatus.OK, "로그인에 성공했습니다"),
     LIKE(HttpStatus.OK, "좋아요 성공"),
     CANCEL_LIKE(HttpStatus.OK, "좋아요 취소"),
+    UPLOAD_PROFILE(HttpStatus.OK, "프로필 사진 등록 완료"),
+
+    UPLOAD_JOBANDCAREER(HttpStatus.OK, "직무/경력 등록 완료"),
     DELETE_BOARD(HttpStatus.OK, "게시글을 삭제하였습니다"),
     DELETE_COMMENT(HttpStatus.OK, "댓글을 삭제하였습니다")
     ;

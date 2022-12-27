@@ -26,4 +26,11 @@ public enum JobTag {
                 .findAny()
                 .orElse(null);
     }
+
+    public static JobTag valueOfJobTag(String TagMsg){
+        return Arrays.stream(values())
+                .filter(value -> value.TagMsg.equals(TagMsg))
+                .findAny()
+                .orElse(null);
+    }
 }
