@@ -4,6 +4,7 @@ import com.example.sokdak.global.MsgResponseDto;
 import com.example.sokdak.global.security.UserDetailsImpl;
 import com.example.sokdak.mypage.dto.MypageResponseDto;
 import com.example.sokdak.mypage.dto.MypageUpdateJobTagRequestDto;
+import com.example.sokdak.mypage.dto.MypageUpdateNicknameRequestDto;
 import com.example.sokdak.mypage.service.MypageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -36,6 +37,13 @@ public class MypageController {
                                        @AuthenticationPrincipal UserDetailsImpl userDetails) {
         return mypageService.updateJobCareerTag(mypageUpdateJobTagRequestDto, userDetails.getUser());
     }
+
+    @PatchMapping(value = "/mypage/{userId}/nickname")
+    public MsgResponseDto updateNickname(@RequestBody MypageUpdateNicknameRequestDto mypageUpdateNicknameRequestDto,
+                                       @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        return mypageService.updateNickname(mypageUpdateNicknameRequestDto, userDetails.getUser());
+    }
+
 
 
 }

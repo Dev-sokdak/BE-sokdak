@@ -41,7 +41,7 @@ public class UserService {
     @Transactional
     public MsgResponseDto signup(SignupRequestDto signupRequestDto) {
 
-        String nickname = RandomStringUtils.random(15, true, true);                         // 닉네임 랜덤 생성
+        String nickname = RandomStringUtils.random(6, true, true);                         // 닉네임 랜덤 생성
 
         String userId = signupRequestDto.getUserId();
         String password = passwordEncoder.encode(signupRequestDto.getPassword());

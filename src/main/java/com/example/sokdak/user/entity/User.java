@@ -70,4 +70,8 @@ public class User {
         this.jobTag = jobTag;
         this.careerTag = careerTag;
     }
+
+    public void updateNickname(String nickname){
+        this.nickname = nickname;
+    }
 }

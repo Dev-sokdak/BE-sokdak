@@ -87,7 +87,7 @@ public class UserKakaoService {
 
     // 2. 토큰으로 카카오 API 호출 : "액세스 토큰"으로 "카카오 사용자 정보" 가져오기
     private LoginKakaoRequestDto getKakaoUserInfo(String accessToken) throws JsonProcessingException {
-        String nickname = RandomStringUtils.random(15, true, true);                         // 닉네임 랜덤 생성
+        String nickname = RandomStringUtils.random(6, true, true);                         // 닉네임 랜덤 생성
         // HTTP Header 생성
         HttpHeaders headers = new HttpHeaders();
         headers.add("Authorization", "Bearer " + accessToken);
@@ -115,7 +115,7 @@ public class UserKakaoService {
 
     // 3. 필요시에 회원가입
     private User registerKakaoUser(LoginKakaoRequestDto kakaoUserInfo) {
-        String nickname = RandomStringUtils.random(15, true, true);
+        String nickname = RandomStringUtils.random(6, true, true);
         String kakaoId = kakaoUserInfo.getUserId();                                                         // DB 에 중복된 Kakao Id 가 있는지 확인
         User kakaoUser = userRepository.findByUserId(kakaoId)
                 .orElse(null);
