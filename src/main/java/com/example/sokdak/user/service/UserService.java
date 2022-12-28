@@ -94,6 +94,11 @@ public class  UserService {
 
     // 중복 아이디 체크
     public boolean checkUserIdDuplicate(String userId){
-        return userRepository.existsByUserId(userId);               // Username이 중복되는 경우 true, 중복되지 않은 경우 False
+        boolean duplicateId = userRepository.existsByUserId(userId);
+        if ( duplicateId == true ) {   // Username이 중복되는 경우 true, 중복되지 않은 경우 False
+            return false;
+        } else {
+            return true;
+        }
     }
 }

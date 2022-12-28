@@ -56,8 +56,8 @@ public class UserController {
     }
 
     // 이메일 중복 확인
-    @GetMapping("/signup/checkId/{userId}")
-    public ResponseEntity<Boolean> checkUserNameDuplicate (@PathVariable String userId){
+    @GetMapping("/signup/checkId/")
+    public ResponseEntity<Boolean> checkUserNameDuplicate (@RequestParam String userId){
         return ResponseEntity.ok(userService.checkUserIdDuplicate(userId));
     }
 }
