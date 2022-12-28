@@ -84,11 +84,11 @@ https://www.notion.so/synuns/Sokdak-c016b8cb325d4460a0f1a92807082d59
 ## 9. 팀원 정보
 | 이름 | 깃 허브 |
 |--|--|
-| 김인광 | https://github.com/ingwang-kim |
-| 김규리 |  |
-| 신승호 |  |
-| 장신원 |  |
-| 최수빈 |  |
+| 김인광(BE) | https://github.com/ingwang-kim |
+| 김규리(BE) | https://github.com/kyuung09 |
+| 신승호(BE) | https://github.com/hongdangmoo49 |
+| 장신원(FE) | https://github.com/synuns |
+| 최수빈(FE) | https://github.com/123456soobin-choi |
 
 
 
