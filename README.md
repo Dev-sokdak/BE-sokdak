@@ -54,8 +54,8 @@
 ## 3. ERD
 ![Untitled](https://user-images.githubusercontent.com/117730606/209832258-2118cc8d-f543-4413-854f-6e6d7761e0ed.png)
 
-## 4. API 명세서(swagger)
-https://devsokdak.shop/swagger-ui.html
+## 4. API 명세서
+-(swagger) : https://devsokdak.shop/swagger-ui.html
 
 ## 5. 기술 스택
 - Frontend : react, vite, AWS S3
