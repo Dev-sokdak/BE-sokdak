@@ -58,12 +58,12 @@
 
   |   | 트러블 슈팅 |
 |--|--|
-| [Frontend] | ![image](https://user-images.githubusercontent.com/117730606/209359166-dbd1631b-f690-4e98-b963-722e74ef5e19.png) |
-| [Frontend] | ![image](https://user-images.githubusercontent.com/117730606/209359236-ac066a00-7794-4ce5-b0ef-4a93fcf2700c.png) |
-| [backend] | ![image](https://user-images.githubusercontent.com/117730606/209359434-4820d2c2-2054-4ab7-8a4c-a26af42a30fc.png) |
-| [backend] | ![image](https://user-images.githubusercontent.com/117730606/209359503-0296a166-d9e5-45f6-8c18-ed2ede3482f4.png) |
-| [backend] | ![image](https://user-images.githubusercontent.com/117730606/209359566-bfea7d54-291a-418b-b67c-945a76a93469.png) |
-| [backend] | ![image](https://user-images.githubusercontent.com/117730606/209359601-419d501b-dc06-4b17-8e84-2d68bca06bbf.png) |
+| [Frontend] |  |
+| [Frontend] |  |
+| [backend] |  |
+| [backend] |  |
+| [backend] |  |
+| [backend] |  |
 
 
 ## 5. 팀 노션
