@@ -5,6 +5,7 @@ import com.example.sokdak.global.exception.S3.S3Uploader;
 import com.example.sokdak.global.exception.SuccessCode;
 import com.example.sokdak.mypage.dto.MypageResponseDto;
 import com.example.sokdak.mypage.dto.MypageUpdateJobTagRequestDto;
+import com.example.sokdak.mypage.dto.MypageUpdateNicknameRequestDto;
 import com.example.sokdak.user.entity.CareerTag;
 import com.example.sokdak.user.entity.JobTag;
 import com.example.sokdak.user.entity.User;
@@ -57,6 +58,16 @@ public class MypageService {
 
         return new MsgResponseDto(SuccessCode.UPLOAD_JOBANDCAREER);
     }
+    // 닉네임 수정
+    @Transactional
+    public MsgResponseDto updateNickname(MypageUpdateNicknameRequestDto mypageUpdateNicknameRequestDto, User user) {
 
+        User user1 = userRepository.findByUserId(user.getUserId()).orElseThrow();
+        String nickname = mypageUpdateNicknameRequestDto.getNickname();
+
+        user1.updateNickname(nickname);
+
+        return new MsgResponseDto(SuccessCode.UPLOAD_NICKNAME);
+    }
 
 }
