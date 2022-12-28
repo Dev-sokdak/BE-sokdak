@@ -44,7 +44,11 @@
 - 상세 조회 페이지에서는 모든 필드 조회
 
 3. 댓글
-- content로 댓글 작성
+- content 를 이용해 댓글 작성
+- 댓글 삭제 기능 (댓글 작성자만 가능)
+
+4. 마이 페이지
+- 마이 페이지에서 profileImage, userId(email), carrerTag, jobTag 출력
 
 ## 3. ERD
 ![Untitled](https://user-images.githubusercontent.com/117730606/209832258-2118cc8d-f543-4413-854f-6e6d7761e0ed.png)
