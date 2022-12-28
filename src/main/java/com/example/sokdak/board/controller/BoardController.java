@@ -44,6 +44,7 @@ public class BoardController {
     public Page<BoardResponseDto> getListBoards(@PageableDefault(size = 20) Pageable pageable) {
         return boardService.getListBoards(pageable);
     }
+
     //카테고리 별 조회
     @GetMapping("/boards/category")
     public Page<BoardResponseDto> getCategoryBoards(@RequestParam("interestTag") int interestTag,@PageableDefault(size = 20) Pageable pageable) {

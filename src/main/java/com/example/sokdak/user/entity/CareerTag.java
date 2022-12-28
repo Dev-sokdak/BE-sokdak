@@ -20,7 +20,8 @@ public enum CareerTag {
     Tag_7(7, "7년차 이상"),
     Tag_8(8, "8년차 이상"),
     Tag_9(9, "9년차 이상"),
-    Tag_10(10, "10년차 이상");
+    Tag_10(10, "10년차 이상"),
+    Tag_999(999,"경력 미설정");
 
     private final int careerTag;
     private final String tagMsg;
