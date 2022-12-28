@@ -69,7 +69,9 @@ public class WebSecurityConfig {
 
         CorsConfiguration config = new CorsConfiguration();
         config.addAllowedOrigin("http://localhost:3000");
+        config.addAllowedOrigin("http://localhost:5173");
         config.addAllowedOrigin("https://miniprojectmeme.s3.ap-northeast-2.amazonaws.com");
+        config.addAllowedOrigin("https://devsokdak.shop");
         config.addAllowedOrigin("http://localhost:8080");               // 허용할 URl (백엔드 테스트 URL)
         config.addAllowedOrigin("http://54.180.86.147/");               // 허용할 URl (AWS EC2 IP)
         config.addExposedHeader(JwtUtil.AUTHORIZATION_HEADER);
