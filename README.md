@@ -6,11 +6,12 @@
 
 1. [프로젝트 소개](#1-프로젝트-소개)
 2. [기능 명세](#2-기능-명세)
-3. [기술 스택](#4-기술-스택)
-4. [트러블 슈팅](#5-트러블-슈팅)
-5. [팀 노션](#6-팀-노션)
-6. [깃 허브](#7-깃-허브)
-7. [팀원 정보](#8-팀원-정보)
+3. [ERD](#3-ERD)
+4. [기술 스택](#4-기술-스택)
+5. [트러블 슈팅](#5-트러블-슈팅)
+6. [팀 노션](#6-팀-노션)
+7. [깃 허브](#7-깃-허브)
+8. [팀원 정보](#8-팀원-정보)
 
 
 
@@ -45,15 +46,15 @@
 3. 댓글
 - content로 댓글 작성
 
+## 3. ERD
+![Untitled](https://user-images.githubusercontent.com/117730606/209832258-2118cc8d-f543-4413-854f-6e6d7761e0ed.png)
 
 
-## 3. 기술 스택
+## 4. 기술 스택
 - Frontend : react, vite, AWS S3
 - Backend  : Java, Spring Boot, Jpa, Mysql , AWS EC2, RDS, S3
 
-## 4.트러블 슈팅
-
-💪 어려웠지만, 극복 해냄!
+## 5. 트러블 슈팅
 
 
   |   | 트러블 슈팅 |
@@ -65,15 +66,15 @@
 | [backend] |  |
 
 
-## 5. 팀 노션
+## 6. 팀 노션
 https://www.notion.so/synuns/Sokdak-c016b8cb325d4460a0f1a92807082d59
 
-## 6. 깃 허브
+## 7. 깃 허브
 - Forntend : https://github.com/Dev-sokdak/FE-sokdak
 - Backend : https://github.com/Dev-sokdak/BE-sokdak
 
 
-## 7. 팀원 정보
+## 8. 팀원 정보
 | 이름 | 깃 허브 |
 |--|--|
 | 김인광 | https://github.com/ingwang-kim |
