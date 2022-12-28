@@ -63,7 +63,6 @@
 | [backend] |  |
 | [backend] |  |
 | [backend] |  |
-| [backend] |  |
 
 
 ## 5. 팀 노션
