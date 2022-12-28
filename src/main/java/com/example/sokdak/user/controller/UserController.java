@@ -11,6 +11,7 @@ import com.example.sokdak.user.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -52,5 +53,11 @@ public class UserController {
         cookie.setPath("/");
         response.addCookie(cookie);
         return new MsgResponseDto(SuccessCode.LOG_IN);
+    }
+
+    // 이메일 중복 확인
+    @GetMapping("/signup/checkId/")
+    public ResponseEntity<Boolean> checkUserNameDuplicate (@RequestParam String userId){
+        return ResponseEntity.ok(userService.checkUserIdDuplicate(userId));
     }
 }

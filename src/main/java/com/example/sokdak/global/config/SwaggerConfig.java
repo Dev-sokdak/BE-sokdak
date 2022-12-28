@@ -70,8 +70,8 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("제목")
-                .description("설명")
+                .title("Devsokdak-Swagger")
+                .description("개발자들의 커뮤니티 Dev-sokdak API")
                 .version(version)
                 .build();
     }

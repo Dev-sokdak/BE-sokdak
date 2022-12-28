@@ -29,10 +29,10 @@ public class User {
     private String profileImage;                            // 프로필 사진 Url (S3 Path)
 
     @Column(nullable = true)
-    private String jobTag;                                  // 직업 태그 ( 0 : 웹개발자, 1 : 서버 개발자, 2: 프론트앤드 개발자, 3: QA 테스트엔지니어, 4: DevOps/시스템관리자)
+    private String jobTag = null;                                  // 직업 태그 ( 0 : 웹개발자, 1 : 서버 개발자, 2: 프론트앤드 개발자, 3: QA 테스트엔지니어, 4: DevOps/시스템관리자)
 
     @Column(nullable = true)
-    private String careerTag;                               // 경력 태그 ( 0 : 신입, 1: 1년 이상 , ... , 10 : 10년 이상)
+    private String careerTag = null;                               // 경력 태그 ( 0 : 신입, 1: 1년 이상 , ... , 10 : 10년 이상)
 
     @Column(nullable = false)
     @Enumerated(value = EnumType.STRING)
