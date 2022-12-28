@@ -18,6 +18,9 @@ import com.example.sokdak.global.exception.SuccessCode;
 import com.example.sokdak.user.entity.User;
 import com.example.sokdak.user.entity.UserRoleEnum;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -44,10 +47,11 @@ public class BoardService {
 
         return new BoardResponseDto(board, image);
     }
-    //게시글 전체 출력
+
+    //게시글 전체 출력 페이징 처리
     @Transactional(readOnly = true)
-    public List<BoardResponseDto> getListBoards() {
-        List<Board> boardList = boardRepository.findAllByOrderByCreatedAtDesc();
+    public Page<BoardResponseDto> getListBoards(Pageable pageable) {
+        Page<Board> boardList = boardRepository.findAll(pageable);
         List<BoardResponseDto> boardResponseDto = new ArrayList<>();
 
         for (Board board : boardList) {
@@ -60,14 +64,17 @@ public class BoardService {
 
             boardResponseDto.add(new BoardResponseDto(board, commentList, image,likeCnt));
         }
-        return boardResponseDto;
+        Page<BoardResponseDto> page = new PageImpl<>(boardResponseDto);
+        return page;
     }
     //카테고리 별 게시글 출력
-    public List<BoardResponseDto> getCategoryBoards(int interestTag) {
+    public Page<BoardResponseDto> getCategoryBoards(int interestTag,Pageable pageable) {
         if (InterestTag.valueOfInterestTag(interestTag) == null) {
             throw new CustomException(ErrorCode.NO_EXIST_LOCAL);
         }
-        List<Board> boardList = boardRepository.findAllByCategoryOrderByCreatedAtDesc(interestTag);
+        String interTag = InterestTag.valueOfInterestTag(interestTag).getTagMsg();
+
+        Page<Board> boardList = boardRepository.findAllByCategoryOrderByCreatedAtDesc(interTag,pageable);
 
         List<BoardResponseDto> boardResponseDto = new ArrayList<>();
         for (Board board : boardList) {
@@ -79,7 +86,8 @@ public class BoardService {
             }
             boardResponseDto.add(new BoardResponseDto(board, commentList, image,likeCnt));
         }
-        return boardResponseDto;
+        Page<BoardResponseDto> page = new PageImpl<>(boardResponseDto);
+        return page;
     }
     //게시글 상세 페이지
     @Transactional(readOnly = true)

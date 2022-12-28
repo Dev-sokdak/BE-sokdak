@@ -8,6 +8,9 @@ import com.example.sokdak.global.MsgResponseDto;
 import com.example.sokdak.global.exception.SuccessCode;
 import com.example.sokdak.global.security.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -38,13 +41,13 @@ public class BoardController {
     }
     // 게시글 전체 조회
     @GetMapping("/boards")
-    public List<BoardResponseDto> getListBoards() {
-        return boardService.getListBoards();
+    public Page<BoardResponseDto> getListBoards(@PageableDefault(size = 20) Pageable pageable) {
+        return boardService.getListBoards(pageable);
     }
     //카테고리 별 조회
     @GetMapping("/boards/category")
-    public List<BoardResponseDto> getCategoryBoards(@RequestParam("interestTag") int interestTag) {
-        return boardService.getCategoryBoards(interestTag);
+    public Page<BoardResponseDto> getCategoryBoards(@RequestParam("interestTag") int interestTag,@PageableDefault(size = 20) Pageable pageable) {
+        return boardService.getCategoryBoards(interestTag,pageable);
     }
     // 게시글 상세 조회 boardId
     @GetMapping("/boards/{boardId}")
