@@ -55,7 +55,7 @@ public class BoardService {
     //게시글 전체 출력 페이징 처리
     @Transactional(readOnly = true)
     public Page<BoardResponseDto> getListBoards(Pageable pageable) {
-        Page<Board> boardList = boardRepository.findAll(pageable);
+        Page<Board> boardList = boardRepository.findAllByOrderByCreatedAtDesc(pageable);
         List<BoardResponseDto> boardResponseDto = new ArrayList<>();
 
         for (Board board : boardList) {
