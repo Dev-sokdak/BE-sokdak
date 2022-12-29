@@ -23,36 +23,85 @@
 
 ## 2. 기능 명세
 
-1. 회원
-- Id(email 형식), password, jobTag(직종), carrerTag(경력)를 입력하여 회원가입
-- Id와  중복 확인 검사
-- nickname은 랜덤 생성
-- Id는 email 형식 포함
-- 게시글 등록, 댓글 등록은 회원만 가능
-- 비회원은 게시글 조회만 가능
-- 프로필 사진 업로드
+<details>
+<summary>🏁  최초 설계 내역</summary>
+<div markdown="1">       
 
-2. 게시글
+    **📍 회원가입/로그인**
+    
+    - 일반 이메일 회원가입 / 로그인
+    - 아이디 중복 확인
+    - 아이디 / 패스워드 정규식 확인
+    - 랜덤 난수 닉네임 생성
+    - OAuth2(카카오) 회원가입 / 로그인
+    - 회원가입 Type 식별 👉 일반 로그인 불가
+     (* 일반회원이 카카오로 로그인 시도시  일치하는 ID가 있을 경우 SignUpType 변경 0 → 1)
+    - 랜덤 난수 닉네임 생성
+    - 로그인/ 로그아웃 인증
+    - JWT Token
+    
+    **📍 커뮤니티**
+    
+    - 커뮤니티 내용 등록
+    - Category 선택 [ 커리어고민, 취업/이직, 회사생활 , … ,  UI/UX]
+    - 사진 업로드 (AWS S3)
+    - 제목 / 내용 
+    - 글 작성시 닉네임으로 출력되도록
+    
+    - 커뮤니티 내용 조회
+    - 전체 조회 
+    - 카테고리별 조회 
+    - 선택 조회
+    
+    - 커뮤니티 내용 수정
+    - 수정시 사진 삭제
+    
+    - 커뮤니티 내용 삭제
+    - 게시물 삭제시 연관 내용 전체 삭제
+    
+    - 커뮤니티 글 좋아요 기능
+    
+    - 커뮤니티 댓글 등록/삭제
+    
+    **📍 마이페이지**
+    
+    - 내 정보 조회
+    - 프로필 사진 업로드
+    - 직무, 경력 정보 등록 & 수정
 
-- 게시글을 등록할 때 카테고리 태그를 선택하여 게시글을 등록
-- title, image, content, categoryTag,createAt, modifiedAt,admin(관리자 테스트 용)으로 게시글 작성
-- 게시글 작성 시, 이미지 파일 한개를 첨부 가능
-- 이미지는 aws S3에 저장
-- 메인 페이지에서는 title, categoryTag, image, nickname, likecount, userCarrerTag,userJobTag,profileImage,createAt,modifiedAt 출력
-- 카테고리별 출력 기능
-- 전체 출력, 카테고리별 출력은 페이징 처리
-- 게시글은 작성자에 한해 수정 가능
-- 상세 조회 페이지에서는 모든 필드 조회
+</div>
+</details>
+<details>
+<summary>✊🏻 추가 스코프 내역</summary>
+<div markdown="1">       
 
-3. 댓글
-- content 를 이용해 댓글 작성
-- 댓글 삭제 기능 (댓글 작성자만 가능)
+    **📍 BE**
+    
+    - http → https 프로토콜 변경
+    - 페이징(Slice)
+    - Swagger
+    - Access Log Logging 처리
+    - 마이페이지 닉네임 수정 기능
+    
+    **📍 FE**
+    
+    - 마이페이지
+    - Infinity Scroll
+    - 디테일 페이지 비로그인 방식 변경
 
-4. 마이 페이지
-- 마이 페이지에서 profileImage, userId(email), carrerTag, jobTag 출력
+</div>
+</details>
 
 ## 3. ERD
+
+<details>
+<summary>ERD</summary>
+<div markdown="1">       
+
 ![Untitled](https://user-images.githubusercontent.com/117730606/209832258-2118cc8d-f543-4413-854f-6e6d7761e0ed.png)
+
+</div>
+</details>
 
 ## 4. API 명세서
 -(swagger) : https://devsokdak.shop/swagger-ui.html
