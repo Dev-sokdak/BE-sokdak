@@ -22,7 +22,7 @@
 
 #
 
-## 1. 프로젝트 소개🗓
+## 1. 프로젝트 소개 🗓
 - 설명 : Wanted 커뮤니티 클론 코딩
 - 기간 : 2022.12.23 ~ 2022.12.29
 - 팀원 : <br> 
@@ -37,7 +37,7 @@
 
 #
 
-## 2. 기술 스택🔨
+## 2. 기술 스택 🔨
 <div align=center> 
 <img src="https://img.shields.io/badge/java-02569B?style=for-the-badge&logo=java&logoColor=white">
 <img src="https://img.shields.io/badge/spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white">
@@ -60,7 +60,7 @@
 
 #
 
-## 3. 기능 명세
+## 3. 기능 명세 📁
 
 <details>
 <summary>🏁  최초 설계 내역</summary>
@@ -136,18 +136,18 @@
 
 #
 
-## 4. ERD
+## 4. ERD 🧑🏻‍💻
 
 ![Untitled](https://user-images.githubusercontent.com/117730606/209832258-2118cc8d-f543-4413-854f-6e6d7761e0ed.png)
 
 #
 
-## 5. API 명세서
+## 5. API 명세서 🖊
 - swagger : https://devsokdak.shop/swagger-ui.html
 
 #
 
-## 6. 트러블 슈팅
+## 6. 트러블 슈팅 👾
 
 |   | 트러블 슈팅 |
 |--|--|
@@ -159,12 +159,12 @@
 
 #
 
-## 7. Notion
+## 7. Notion 📔
 https://www.notion.so/synuns/Sokdak-c016b8cb325d4460a0f1a92807082d59
 
 #
 
-## 8. Github
+## 8. Github 🐱
 - Forntend : https://github.com/Dev-sokdak/FE-sokdak
 - Backend : https://github.com/Dev-sokdak/BE-sokdak
 
