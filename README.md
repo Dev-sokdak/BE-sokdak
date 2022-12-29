@@ -14,11 +14,12 @@
 1. [프로젝트 소개](#1-프로젝트-소개-)
 2. [기술 스택](#2-기술-스택-)
 3. [기능 명세](#3-기능-명세-)
-4. [ERD](#4-erd-)
-5. [API 명세서 (with. swagger)](#5-api-명세서-)
-6. [트러블 슈팅](#6-트러블-슈팅-)
-7. [TEAM NOTION](#7-notion-)
-8. [GITHUB](#8-github-)
+4. [시연영상](#4-시연영상)
+5. [ERD](#5-erd-)
+6. [API 명세서 (with. swagger)](#6-api-명세서-)
+7. [트러블 슈팅](#7-트러블-슈팅-)
+8. [TEAM NOTION](#8-notion-)
+9. [GITHUB](#9-github-)
 
 #
 
@@ -136,18 +137,27 @@
 
 #
 
-## 4. ERD 🧑🏻‍💻
+## 4. 시연영상 
+
+![Untitled](https://user-images.githubusercontent.com/57736547/209971792-69239f26-31df-4298-9593-ceb1365aecc6.gif)
+
+![Untitled](https://user-images.githubusercontent.com/57736547/209971801-64687d18-9469-4b65-8220-67c0e8039939.gif)
+
+![Untitled](https://user-images.githubusercontent.com/57736547/209971796-39a73aa0-c2d7-4a8a-9a03-bc864b001047.gif)
+
+
+## 5. ERD 🧑🏻‍💻
 
 ![Untitled](https://user-images.githubusercontent.com/117730606/209832258-2118cc8d-f543-4413-854f-6e6d7761e0ed.png)
 
 #
 
-## 5. API 명세서 🖊
+## 6. API 명세서 🖊
 - swagger : https://devsokdak.shop/swagger-ui.html
 
 #
 
-## 6. 트러블 슈팅 👾
+## 7. 트러블 슈팅 👾
 
 |   | 트러블 슈팅 |
 |--|--|
@@ -159,12 +169,12 @@
 
 #
 
-## 7. Notion 📔
+## 8. Notion 📔
 https://www.notion.so/synuns/Sokdak-c016b8cb325d4460a0f1a92807082d59
 
 #
 
-## 8. Github 🐱
+## 9. Github 🐱
 - Forntend : https://github.com/Dev-sokdak/FE-sokdak
 - Backend : https://github.com/Dev-sokdak/BE-sokdak
 
