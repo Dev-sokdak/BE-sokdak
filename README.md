@@ -1,33 +1,70 @@
-# 4조 클론 프로젝트 [개발자 커뮤니티 sokdak] #
-![image](https://user-images.githubusercontent.com/117730606/209823456-57bbc991-d430-4f31-8ade-6b5ad2114bd0.png)
 
 
+![Group 19 (1)](https://user-images.githubusercontent.com/117708164/209903512-794cdc8a-8001-4a05-bd97-b4af66a32abc.png)
+###  CloneProject Team 4
+# 🌀 Dev Sokdak 
 
+- 개발자들의 커뮤니티 Sokdak 💬
+- 커리어와 라이프스타일에 대해 자유롭게 이야기 할 수 있어요 🙋🏻   
+
+## 🧩 Index
 
 1. [프로젝트 소개](#1-프로젝트-소개)
-2. [기능 명세](#2-기능-명세)
-3. [ERD](#3-ERD)
-4. [API 명세서(swagger)](#4-API-명세서)
-5. [기술 스택](#5-기술-스택)
+2. [기술 스택](#2-기술-스택)
+3. [기능 명세](#3-기능-명세)
+4. [ERD](#4-erd)
+5. [API 명세서 (with. swagger)](#5-api-명세서)
 6. [트러블 슈팅](#6-트러블-슈팅)
-7. [팀 노션](#7-팀-노션)
-8. [깃 허브](#8-깃-허브)
-9. [팀원 정보](#9-팀원-정보)
+7. [TEAM NOTION](#7-notion)
+8. [GITHUB](#8-github)
 
+#
 
+## 1. 프로젝트 소개🗓
+- 설명 : Wanted 커뮤니티 클론 코딩
+- 기간 : 2022.12.23 ~ 2022.12.29
+- 팀원 : <br> 
 
-## 1. 프로젝트 소개
+| - | NAME | GITHUB |
+|--|--|--|
+| BE | 김인광 | https://github.com/ingwang-kim |
+| BE | 김규리 | https://github.com/kyuung09 |
+| BE | 신승호 | https://github.com/hongdangmoo49 |
+| FE | 장신원 | https://github.com/synuns |
+| FE | 최수빈 | https://github.com/123456soobin-choi |
 
-### 프로젝트 이름 : **개발자 커뮤니티** - SokDak-!
-- 프로젝트 설명 : 원티드 커뮤니티 클론 코딩
+#
 
-## 2. 기능 명세
+## 2. 기술 스택🔨
+<div align=center> 
+<img src="https://img.shields.io/badge/java-02569B?style=for-the-badge&logo=java&logoColor=white">
+<img src="https://img.shields.io/badge/spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white">
+<img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white"> 
+<img src="https://img.shields.io/badge/jpa-181717?style=for-the-badge&logo=jpa&logoColor=white">
+<img src="https://img.shields.io/badge/amazon aws-F8DC75?style=for-the-badge&logo=amazonaws&logoColor=white">
+<img src="https://img.shields.io/badge/amazon rds-61DAFB?style=for-the-badge&logo=amazonrds&logoColor=white"> 
+<img src="https://img.shields.io/badge/amazon s3-E34F26?style=for-the-badge&logo=amazons3&logoColor=white"> 
+<br>
+
+<img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black">
+<img src="https://img.shields.io/badge/redux-E34F26?style=for-the-badge&logo=redux&logoColor=white"> 
+<img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">
+<img src="https://img.shields.io/badge/amazon s3-E34F26?style=for-the-badge&logo=amazons3&logoColor=white"> 
+<img src="https://img.shields.io/badge/vite-DD0031?style=for-the-badge&logo=vite&logoColor=white">
+<img src="https://img.shields.io/badge/reduxjs/toolkit-1572B6?style=for-the-badge&logo=reduxjs&logoColor=white"> 
+<img src="https://img.shields.io/badge/axios-FCC624?style=for-the-badge&logo=axios&logoColor=black"> 
+<br>
+</div>
+
+#
+
+## 3. 기능 명세
 
 <details>
 <summary>🏁  최초 설계 내역</summary>
 <div markdown="1">       
 
-    **📍 회원가입/로그인**
+    📍 회원가입/로그인
     
     - 일반 이메일 회원가입 / 로그인
     - 아이디 중복 확인
@@ -40,7 +77,7 @@
     - 로그인/ 로그아웃 인증
     - JWT Token
     
-    **📍 커뮤니티**
+    📍 커뮤니티
     
     - 커뮤니티 내용 등록
     - Category 선택 [ 커리어고민, 취업/이직, 회사생활 , … ,  UI/UX]
@@ -63,7 +100,7 @@
     
     - 커뮤니티 댓글 등록/삭제
     
-    **📍 마이페이지**
+    📍 마이페이지
     
     - 내 정보 조회
     - 프로필 사진 업로드
@@ -75,7 +112,7 @@
 <summary>✊🏻 추가 스코프 내역</summary>
 <div markdown="1">       
 
-    **📍 BE**
+    📍 BE
     
     - http → https 프로토콜 변경
     - 페이징(Slice)
@@ -83,7 +120,7 @@
     - Access Log Logging 처리
     - 마이페이지 닉네임 수정 기능
     
-    **📍 FE**
+    📍 FE
     
     - 마이페이지
     - Infinity Scroll
@@ -92,28 +129,22 @@
 </div>
 </details>
 
-## 3. ERD
+#
 
-<details>
-<summary>ERD</summary>
-<div markdown="1">       
+## 4. ERD
 
 ![Untitled](https://user-images.githubusercontent.com/117730606/209832258-2118cc8d-f543-4413-854f-6e6d7761e0ed.png)
 
-</div>
-</details>
+#
 
-## 4. API 명세서
--(swagger) : https://devsokdak.shop/swagger-ui.html
+## 5. API 명세서
+- swagger : https://devsokdak.shop/swagger-ui.html
 
-## 5. 기술 스택
-- Frontend : react, vite, AWS S3
-- Backend  : Java, Spring Boot, Jpa, Mysql , AWS EC2, RDS, S3
+#
 
 ## 6. 트러블 슈팅
 
-
-  |   | 트러블 슈팅 |
+|   | 트러블 슈팅 |
 |--|--|
 | [Frontend] |  |
 | [Frontend] |  |
@@ -121,24 +152,15 @@
 | [backend] |  |
 | [backend] |  |
 
+#
 
-## 7. 팀 노션
+## 7. Notion
 https://www.notion.so/synuns/Sokdak-c016b8cb325d4460a0f1a92807082d59
 
-## 8. 깃 허브
+#
+
+## 8. Github
 - Forntend : https://github.com/Dev-sokdak/FE-sokdak
 - Backend : https://github.com/Dev-sokdak/BE-sokdak
 
-
-## 9. 팀원 정보
-| 이름 | 깃 허브 |
-|--|--|
-| 김인광(BE) | https://github.com/ingwang-kim |
-| 김규리(BE) | https://github.com/kyuung09 |
-| 신승호(BE) | https://github.com/hongdangmoo49 |
-| 장신원(FE) | https://github.com/synuns |
-| 최수빈(FE) | https://github.com/123456soobin-choi |
-
-
-
-
+#
