@@ -26,19 +26,19 @@ public class MypageController {
         return mypageService.getMypage(userDetails.getUser());
     }
 
-    @PatchMapping(value = "/mypage/{userId}/profile", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
+    @PatchMapping(value = "/mypage/profile", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
     public MsgResponseDto updateProfile(@AuthenticationPrincipal UserDetailsImpl userDetails,
                                         @RequestPart("image") MultipartFile multipartFile) throws IOException {
         return mypageService.updateProfile(userDetails.getUser(), multipartFile);
     }
 
-    @PatchMapping(value = "/mypage/{userId}/jobTag")
+    @PatchMapping(value = "/mypage/jobTag")
     public MsgResponseDto updateJobTag(@RequestBody MypageUpdateJobTagRequestDto mypageUpdateJobTagRequestDto,
                                        @AuthenticationPrincipal UserDetailsImpl userDetails) {
         return mypageService.updateJobCareerTag(mypageUpdateJobTagRequestDto, userDetails.getUser());
     }
 
-    @PatchMapping(value = "/mypage/{userId}/nickname")
+    @PatchMapping(value = "/mypage/nickname")
     public MsgResponseDto updateNickname(@RequestBody MypageUpdateNicknameRequestDto mypageUpdateNicknameRequestDto,
                                        @AuthenticationPrincipal UserDetailsImpl userDetails) {
         return mypageService.updateNickname(mypageUpdateNicknameRequestDto, userDetails.getUser());

@@ -78,7 +78,7 @@ public class BoardResponseDto {
         this.commentList = commentList;
     }
 
-    public BoardResponseDto(Board board, List<CommentResponseDto> commentList, String image, Long likeCnt,boolean boardlike, boolean commentIncluding) { //게시글 상세 페이지
+    public BoardResponseDto(Board board, List<CommentResponseDto> commentList, String image, Long likeCnt,boolean boardlike, boolean commentIncluding, Long commentCnt) { //게시글 상세 페이지
         this.id = board.getId();            //this.id: (위에서 선언된) 필드, Board 객체의 board 매개변수로 들어온 데이터를 getId() 에 담는다(Client 에게로 보내기 위해)
         this.title = board.getTitle();
         this.content = board.getContent();
@@ -94,5 +94,6 @@ public class BoardResponseDto {
         this.createdAt = board.getCreatedAt();
         this.modifiedAt = board.getModifiedAt();
         this.commentList = commentList;
+        this.commentCnt = commentCnt;
     }
 }

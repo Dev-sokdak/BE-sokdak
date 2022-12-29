@@ -104,6 +104,7 @@ public class BoardService {
         );
 
         Long likeCnt = likeRepository.likeCnt(board.getId());
+        Long commentCnt = commentRepository.countByBoardId(board.getId());
         String image = board.getImage();
 
         // 댓글 리스트 생성 + 사용자/댓글작성자 일치 여부 확인
@@ -133,7 +134,7 @@ public class BoardService {
             commentIncluding = false;
         }
 
-        return new BoardResponseDto(board, commentListResponseDto, image, likeCnt, boardlike, commentIncluding);
+        return new BoardResponseDto(board, commentListResponseDto, image, likeCnt, boardlike, commentIncluding, commentCnt);
     }
 
     //게시글 업데이트 /*이미지 수정 필요*/
