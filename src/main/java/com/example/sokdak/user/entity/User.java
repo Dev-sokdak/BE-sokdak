@@ -38,14 +38,14 @@ public class User {
     @Enumerated(value = EnumType.STRING)
     private UserRoleEnum role;
 
-    // 카카오 User용 생성자
-    public User(String userId, String password, String nickname, int signUpType, UserRoleEnum role) {
-        this.userId = userId;
-        this.password = password;
-        this.nickname = nickname;
-        this.signUpType = signUpType;
-        this.role = role;
-    }
+//    // 카카오 User용 생성자
+//    public User(String userId, String password, String nickname,  String jobTag, String careerTag, int signUpType, UserRoleEnum role) {
+//        this.userId = userId;
+//        this.password = password;
+//        this.nickname = nickname;
+//        this.signUpType = signUpType;
+//        this.role = role;
+//    }
 
     // 일반 User용 생성자
     public User(String userId, String password, String nickname, String jobTag, String careerTag, int signUpType, UserRoleEnum role) {

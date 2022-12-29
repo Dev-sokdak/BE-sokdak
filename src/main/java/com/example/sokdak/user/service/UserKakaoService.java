@@ -2,6 +2,8 @@ package com.example.sokdak.user.service;
 
 import com.example.sokdak.global.jwt.JwtUtil;
 import com.example.sokdak.user.dto.LoginKakaoRequestDto;
+import com.example.sokdak.user.entity.CareerTag;
+import com.example.sokdak.user.entity.JobTag;
 import com.example.sokdak.user.entity.User;
 import com.example.sokdak.user.entity.UserRoleEnum;
 import com.example.sokdak.user.repository.UserRepository;
@@ -34,6 +36,8 @@ public class UserKakaoService {
     private final PasswordEncoder passwordEncoder;
 
     private static int signUpType = 1;
+    private static int basicJobTag = 999;
+    private static int basicCareerTag = 999;
 
 
     public String kakaoLogin(String code, HttpServletResponse response) throws JsonProcessingException {
@@ -118,8 +122,14 @@ public class UserKakaoService {
     private User registerKakaoUser(LoginKakaoRequestDto kakaoUserInfo) {
         String nickname = RandomStringUtils.random(6, true, true);
         String kakaoId = kakaoUserInfo.getUserId();                                                         // DB 에 중복된 Kakao Id 가 있는지 확인
+
+        String jobTag = JobTag.valueOfJobTag(basicJobTag).getTagMsg();                         // jobTag Enum에서 입력받은 int value와  일치하는 String 값 반환
+        String careerTag = CareerTag.valueOfCareerTag(basicCareerTag).getTagMsg();             // careerTag Enum에서 입력받은 int value와  일치하는 String 값 반환
+
+
         User kakaoUser = userRepository.findByUserId(kakaoId)
                 .orElse(null);
+
         if (kakaoUser != null) {                                                                            // 카카오 사용자 email 동일한 email 가진 회원이 있는지 확인
             User sameEmailUser = userRepository.findByUserId(kakaoUser.getUserId()).orElse(null);
             sameEmailUser.update(signUpType);
@@ -132,7 +142,7 @@ public class UserKakaoService {
             // email: kakao email
             String email = kakaoUserInfo.getUserId();
 
-            kakaoUser = new User(kakaoId, encodedPassword, nickname, signUpType, UserRoleEnum.USER);
+            kakaoUser = new User(kakaoId, encodedPassword, nickname, jobTag, careerTag, signUpType, UserRoleEnum.USER);
         }
         userRepository.save(kakaoUser);
 
