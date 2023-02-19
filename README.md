@@ -13,13 +13,14 @@
 
 1. [프로젝트 소개](#1-프로젝트-소개-)
 2. [기술 스택](#2-기술-스택-)
-3. [기능 명세](#3-기능-명세-)
-4. [시연영상](#4-시연영상)
-5. [ERD](#5-erd-)
-6. [API 명세서 (with. swagger)](#6-api-명세서-)
-7. [트러블 슈팅](#7-트러블-슈팅-)
-8. [TEAM NOTION](#8-notion-)
-9. [GITHUB](#9-github-)
+3. [아키텍처](#3-아키-텍처-)
+4. [기능 명세](#4-기능-명세-)
+5. [시연영상](#5-시연영상)
+6. [ERD](#6-erd-)
+7. [API 명세서 (with. swagger)](#7-api-명세서-)
+8. [트러블 슈팅](#8-트러블-슈팅-)
+9. [TEAM NOTION](#9-notion-)
+10. [GITHUB](#10-github-)
 
 #
 
@@ -61,7 +62,13 @@
 
 #
 
-## 3. 기능 명세 🗂
+## 3. 아키 텍처 🗂
+![image](https://user-images.githubusercontent.com/117730606/219923447-2ad05fcf-acb2-42a4-9fb6-d66c1f804911.png)
+
+
+#
+
+## 4. 기능 명세 🗂
 
 <details>
 <summary>🏁  최초 설계 내역</summary>
@@ -137,7 +144,7 @@
 
 #
 
-## 4. 시연영상 
+## 5. 시연영상 
 
 ![Untitled](https://user-images.githubusercontent.com/57736547/209971792-69239f26-31df-4298-9593-ceb1365aecc6.gif)
 
@@ -146,18 +153,18 @@
 ![Untitled](https://user-images.githubusercontent.com/57736547/209971796-39a73aa0-c2d7-4a8a-9a03-bc864b001047.gif)
 
 
-## 5. ERD 🧑🏻‍💻
+## 6. ERD 🧑🏻‍💻
 
 ![Untitled](https://user-images.githubusercontent.com/117730606/209832258-2118cc8d-f543-4413-854f-6e6d7761e0ed.png)
 
 #
 
-## 6. API 명세서 🖊
+## 7. API 명세서 🖊
 - swagger : https://devsokdak.shop/swagger-ui.html
 
 #
 
-## 7. 트러블 슈팅 👾
+## 8. 트러블 슈팅 👾
 
 |   | 트러블 슈팅 |
 |--|--|
@@ -169,12 +176,12 @@
 
 #
 
-## 8. Notion 📔
+## 9. Notion 📔
 https://www.notion.so/synuns/Sokdak-c016b8cb325d4460a0f1a92807082d59
 
 #
 
-## 9. Github 🐱
+## 10. Github 🐱
 - Forntend : https://github.com/Dev-sokdak/FE-sokdak
 - Backend : https://github.com/Dev-sokdak/BE-sokdak
 
